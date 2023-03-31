@@ -45,8 +45,11 @@
     {
       "group": "Reference",
       "pages": [
+        "api-reference/authentication",
         "api-reference/accounts",
-        "api-reference/users",
+        "api-reference/users"
+      ]
+    },
         {
           "group": "Sources",
           "pages": [
@@ -202,18 +205,7 @@
             }
           ]
         }
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
-      ]
-    }
-  ],
+      ],
   "footerSocials": {
     "twitter": "https://twitter.com/bruinenhq",
     "github": "https://github.com/bruinenxyz",

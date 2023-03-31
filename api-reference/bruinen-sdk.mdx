@@ -4,8 +4,8 @@ description: "Integrate with Bruinen quickly and easily using our Javascript/Typ
 ---
 
 The Bruinen SDK makes it easy for developers to access the API without having to interact with server code directly.
-The SDK is currently only available in Javascript and is written 100% in Typescript.
-It is available as both a browser script and a Node.js SDK.
+The SDK is currently only available in Typescript.
+It is available as both a browser script and a Node.js package.
 
 All endpoints will be strongly typed with Typescript.
 
@@ -32,9 +32,7 @@ const Bruinen = new Bruinen({
 
 ## Use in the browser
 
-<Warning>
-This section is under construction
-</Warning>
+<Warning>This section is under construction</Warning>
 
 ## Requesting user authentication
 
@@ -42,21 +40,26 @@ It is significantly easier to use our managed UI, Bruinen Connect, to request a 
 However if you prefer to build your own custom UI, you can do so via the SDK.
 
 <Warning>
-Without Bruinen Connect, users will not be able to reuse connections previously made with Bruinen, possibly adding additional steps for the user to complete authentication
+  Without Bruinen Connect, users will not be able to reuse connections
+  previously made with Bruinen, possibly adding additional steps for the user to
+  complete authentication
 </Warning>
 
 ```typescript
 const user = await Bruinen.findOrCreateUser("test@test.com");
 const connectionRequest = await Bruinen.connectionRequest(user.id, "github");
-if(connectionRequest.status !== "accepted"){
-    // Redirect the user to connectionRequest.authUrl
+if (connectionRequest.status !== "accepted") {
+  // Redirect the user to connectionRequest.authUrl
 }
 
 const userAccounts = await Bruinen.getAccounts(user.id);
-const githubAccount = _.filter(userAccounts, account => account.source === "github");
+const githubAccount = _.filter(
+  userAccounts,
+  (account) => account.source === "github"
+);
 
 // Now you have the user's Github account! If the user rejected the connectionrequest
-// or there was another error, the connectionRequest.error field will be set on 
+// or there was another error, the connectionRequest.error field will be set on
 // the connectionRequest you created.
 ```
 

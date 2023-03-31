@@ -1,0 +1,22 @@
+---
+title: "Authentication"
+description: "How to authenticate with the Bruinen API"
+---
+
+Before authenticating with the Bruinen API you will need to create an account and generate an API key. You can do this by visiting the [Bruinen Dashboard](https://dashboard.bruinen.com).
+
+Your API key is a secret and should be kept safe. If you suspect your API key has been compromised, reach out to us ASAP.
+
+Bruinen uses an API key in the header of your requests to authenticate. `X-API-Key: <your-api-key>`
+
+```typescript
+import axios from "axios";
+const bruinenAPI = axios.create(
+  baseUrl: "https://api.bruinen.co",
+  headers: {
+    X-API-Key: <your-api-key>
+  }
+);
+```
+
+To authenticate the Bruinen SDK, view the documentation for [Bruinen SDK](/api-reference/bruinen-sdk). Authentication varies when used in the frontend so as not to expose your API key.
