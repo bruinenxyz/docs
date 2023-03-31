@@ -46,8 +46,14 @@
       "group": "Reference",
       "pages": [
         "api-reference/authentication",
-        "api-reference/accounts",
-        "api-reference/users"
+        {
+          "group": "Accounts",
+          "pages": ["api-reference/accounts/overview", "api-reference/accounts/get-accounts-by-user", "api-reference/accounts/get-account"]
+        },
+        {
+          "group": "Users",
+          "pages": ["api-reference/users/overview",  "api-reference/users/find-or-create","api-reference/users/get-user", "api-reference/users/get-all-users"]
+        }
       ]
     },
         {
