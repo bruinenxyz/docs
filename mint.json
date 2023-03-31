@@ -1,25 +1,25 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Documentation Starter Kit",
+  "name": "Bruinen Documentation",
   "logo": {
-    "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
+    "dark": "/logo/bruinen-light-docs.svg",
+    "light": "/logo/bruinen-dark-docs.svg"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0069ED",
-    "light": "#4D9CFF",
-    "dark": "#0050B4"
+    "primary": "#5ACDDA",
+    "light": "#F9F9F9",
+    "dark": "#26293E"
   },
   "topbarLinks": [
     {
-      "name": "Documentation",
-      "url": "https://mintlify.com/docs"
+      "name": "Website",
+      "url": "https://bruinen.co"
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://github.com/mintlify/starter"
+    "name": "Beta access",
+    "url": "https://bruinen.co"
   },
   "anchors": [
     {
@@ -28,24 +28,181 @@
       "url": "api-reference"
     },
     {
-      "name": "Changelog",
-      "icon": "list",
-      "url": "https://mintlify.com"
-    },
-    {
       "name": "Community",
       "icon": "discord",
-      "url": "https://mintlify.com/community"
+      "url": "https://discord.gg/4WwZa9TPgx"
     }
   ],
   "navigation": [
     {
-      "group": "Home",
-      "pages": ["introduction", "features"]
+      "group": "Guides",
+      "pages": ["introduction", "getting-started", "key-concepts"]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
+      "group": "Tools",
+      "pages": ["api-reference/bruinen-connect", "api-reference/bruinen-sdk"]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        "api-reference/accounts",
+        "api-reference/users",
+        {
+          "group": "Sources",
+          "pages": [
+            "api-reference/sources/overview",
+            {
+              "group": "Amazon", 
+              "pages": [
+                "api-reference/sources/amazon/overview",
+                "api-reference/sources/amazon/get-addresses",
+                "api-reference/sources/amazon/get-order",
+                "api-reference/sources/amazon/get-orders"
+              ]
+            },
+            {
+              "group": "Cash App",
+              "pages": [
+                "api-reference/sources/cash-app/overview",
+                "api-reference/sources/cash-app/get-profile"
+              ]
+            },
+            {
+              "group": "Discord",
+              "pages": [
+                "api-reference/sources/discord/overview",
+                "api-reference/sources/discord/get-profile"
+              ]
+            },
+            {
+              "group": "Ethereum",
+              "pages": [
+                "api-reference/sources/ethereum/overview",
+                "api-reference/sources/ethereum/get-balance",
+                "api-reference/sources/ethereum/get-nfts",
+                "api-reference/sources/ethereum/get-transactions-count"
+              ]
+            },
+            {
+              "group": "Facebook",
+              "pages": [
+                "api-reference/sources/facebook/overview",
+                "api-reference/sources/facebook/get-friends",
+                "api-reference/sources/facebook/get-liked-pages",
+                "api-reference/sources/facebook/get-photos",
+                "api-reference/sources/facebook/get-posts",
+                "api-reference/sources/facebook/get-profile"
+              ]
+            },
+            {
+              "group": "Github",
+              "pages": [
+                "api-reference/sources/github/overview",
+                "api-reference/sources/github/get-profile",
+                "api-reference/sources/github/get-repos",
+                "api-reference/sources/github/get-starred-repos"
+              ]
+            },
+            {
+              "group": "Google",
+              "pages": [
+                "api-reference/sources/google/overview",
+                {
+                  "group": "Calendar",
+                  "pages": [
+                    "api-reference/sources/google/calendar/get-calendar",
+                    "api-reference/sources/google/calendar/get-calendars",
+                    "api-reference/sources/google/calendar/get-event",
+                    "api-reference/sources/google/calendar/get-events"
+                  ]
+                },
+                {
+                  "group": "Mail",
+                  "pages": [
+                    "api-reference/sources/google/mail/get-draft",
+                    "api-reference/sources/google/mail/get-drafts",
+                    "api-reference/sources/google/mail/get-label",
+                    "api-reference/sources/google/mail/get-labels",
+                    "api-reference/sources/google/mail/get-message",
+                    "api-reference/sources/google/mail/get-messages",
+                    "api-reference/sources/google/mail/get-profile",
+                    "api-reference/sources/google/mail/get-thread",
+                    "api-reference/sources/google/mail/get-threads"
+                  ]
+                }
+              ]
+            },
+            {
+              "group": "LinkedIn",
+              "pages": [
+                "api-reference/sources/linkedin/overview",
+                "api-reference/sources/linkedin/get-profile"
+              ]
+            },
+            {
+              "group": "Polygon",
+              "pages": [
+                "api-reference/sources/polygon/overview",
+                "api-reference/sources/polygon/get-balance",
+                "api-reference/sources/polygon/get-nfts",
+                "api-reference/sources/polygon/get-transactions-count"
+              ]
+            },
+            {
+              "group": "Shopify",
+              "pages": [
+                "api-reference/sources/shopify/overview",
+                "api-reference/sources/shopify/get-accounts",
+                "api-reference/sources/shopify/get-cart",
+                "api-reference/sources/shopify/get-favorites",
+                "api-reference/sources/shopify/get-followed-shops",
+                "api-reference/sources/shopify/get-orders",
+                "api-reference/sources/shopify/get-profile"
+              ]
+            },
+            {
+              "group": "Spotify",
+              "pages": [
+                "api-reference/sources/spotify/overview",
+                "api-reference/sources/spotify/get-profile",
+                "api-reference/sources/spotify/get-profile"
+              ]
+            },
+            {
+              "group": "Stack Overflow",
+              "pages": [
+                "api-reference/sources/stack-overflow/overview",
+                "api-reference/sources/stack-overflow/get-posts",
+                "api-reference/sources/stack-overflow/get-profile"
+              ]
+            },
+            {
+              "group": "Twitter",
+              "pages": [
+                "api-reference/sources/twitter/overview",
+                "api-reference/sources/twitter/get-dms",
+                "api-reference/sources/twitter/get-followers",
+                "api-reference/sources/twitter/get-following",
+                "api-reference/sources/twitter/get-liked-tweets",
+                "api-reference/sources/twitter/get-mention-tweets",
+                "api-reference/sources/twitter/get-pinned-tweets",
+                "api-reference/sources/twitter/get-profile",
+                "api-reference/sources/twitter/get-tweets",
+                "api-reference/sources/twitter/get-users-details"
+              ]
+            },
+            {
+              "group": "Venmo",
+              "pages": [
+                "api-reference/sources/venmo/overview",
+                "api-reference/sources/venmo/get-friends",
+                "api-reference/sources/venmo/get-profile",
+                "api-reference/sources/venmo/get-transactions"
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "group": "Endpoint Examples",
@@ -58,8 +215,8 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "twitter": "https://twitter.com/bruinenhq",
+    "github": "https://github.com/bruinenxyz",
+    "linkedin": "https://www.linkedin.com/company/bruinenxyz"
   }
 }

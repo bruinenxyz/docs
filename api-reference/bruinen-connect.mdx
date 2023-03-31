@@ -1,0 +1,56 @@
+---
+title: "Bruinen Connect"
+description: "Streamline user account authentication with our managed UI."
+---
+
+Bruinen Connect is an in-site script used to manage user account authentication directly without the need for you to write any custom code.
+Connect provides a managed UI to allow: 
+
+* You to request access to user accounts
+* Users to grant permission for you to use data from already-authenticated sources
+* Users to view and manage authenticated sources directly in your application
+
+When using Bruinen Connect, you will not need to build a custom UI to handle account authentication or manage the complexities of redirecting users to source-specific authentication URLs.
+
+## Setting up Connect
+
+To install Bruinen Connect, add the following tag to your HTML header:
+
+```html
+<script src="script.bruinen.xyz/script.js" />
+```
+
+Once installed, initialize Connect:
+
+```typescript
+window.bruinenInit({
+    clientID: string; // Required
+    clientUserToken: string; // User auth token from Bruinen (optional)
+    sources: Array<Source>; // List of sources to link with
+    requiredSources: Array<Source>; // List of sources that are required
+    onSourceConnectionSuccess: Function; // Callback called when a new source is successfully linked
+});
+```
+
+On initialization, you can optionally pass a `clientUserToken`, which can be generated via the `/auth/:userId` endpoint or using the SDK:
+
+```typescript
+const clientUserToken = bruinenSDK.getUserAuthToken(email);
+```
+
+If this token is passed, Bruinen will use it to pre-fill any permissions already granted to you by the user.
+Note that this method can only be called using your secret and will fail if initiated from the browser-side SDK.
+
+The `onSourceConnectionRequest` callback should accept `accountID` as a parameter so that the authenticated account can be identified and used in the callback.
+
+## Using Connect
+
+```typescript
+{
+    // Opens the modal
+    function openConnect(): void
+
+    // Forces the modal to close (e.g., if the user navigates away from page)
+    function closeConnect(): void
+}
+```
