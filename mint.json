@@ -45,8 +45,17 @@
     {
       "group": "Reference",
       "pages": [
-        "api-reference/accounts",
-        "api-reference/users",
+        "api-reference/authentication",
+        {
+          "group": "Accounts",
+          "pages": ["api-reference/accounts/overview", "api-reference/accounts/get-accounts-by-user", "api-reference/accounts/get-account"]
+        },
+        {
+          "group": "Users",
+          "pages": ["api-reference/users/overview",  "api-reference/users/find-or-create","api-reference/users/get-user", "api-reference/users/get-all-users"]
+        }
+      ]
+    },
         {
           "group": "Sources",
           "pages": [
@@ -202,18 +211,7 @@
             }
           ]
         }
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
-      ]
-    }
-  ],
+      ],
   "footerSocials": {
     "twitter": "https://twitter.com/bruinenhq",
     "github": "https://github.com/bruinenxyz",

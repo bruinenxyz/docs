@@ -3,8 +3,6 @@ paths:
   /:
     get:
       operationId: AppController_getHello
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -16,8 +14,6 @@ paths:
   /users:
     post:
       operationId: UsersController_create
-      summary: ''
-      description: ''
       parameters: []
       requestBody:
         required: true
@@ -34,8 +30,6 @@ paths:
                 $ref: '#/components/schemas/ReturnedUserDto'
     get:
       operationId: UsersController_findUserFromToken
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -47,8 +41,6 @@ paths:
   /users/find-or-create:
     post:
       operationId: UsersController_findOrCreateUser
-      summary: ''
-      description: ''
       parameters: []
       requestBody:
         required: true
@@ -66,8 +58,6 @@ paths:
   /users/byId/{id}:
     get:
       operationId: UsersController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -80,21 +70,23 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/ReturnedUserDto'
   /users/all:
     get:
       operationId: UsersController_findAll
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReturnedUserDto'
   /users/{id}:
     patch:
       operationId: UsersController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -116,8 +108,6 @@ paths:
                 $ref: '#/components/schemas/ReturnedUserDto'
     delete:
       operationId: UsersController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -535,8 +525,6 @@ paths:
   /sources/ethereum/nfts:
     get:
       operationId: EthereumController_getNfts
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -555,8 +543,6 @@ paths:
   /sources/ethereum/balance:
     get:
       operationId: EthereumController_getBalance
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -574,8 +560,6 @@ paths:
   /sources/ethereum/transactionsCount:
     get:
       operationId: EthereumController_getTransactions
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -593,8 +577,6 @@ paths:
   /sources/polygon/nfts:
     get:
       operationId: PolygonController_getNfts
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -613,8 +595,6 @@ paths:
   /sources/polygon/balance:
     get:
       operationId: PolygonController_getBalance
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -632,8 +612,6 @@ paths:
   /sources/polygon/transactionsCount:
     get:
       operationId: PolygonController_getTransactions
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -651,8 +629,6 @@ paths:
   /sources/linkedin/profile:
     get:
       operationId: LinkedinController_getProfile
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -671,8 +647,6 @@ paths:
   /sources/linkedin/metadata:
     get:
       operationId: LinkedinController_getMetadata
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -1613,8 +1587,6 @@ paths:
   /auth/{userId}:
     get:
       operationId: AuthController_getUserAuthToken
-      summary: ''
-      description: ''
       parameters:
         - name: userId
           required: true
@@ -1631,8 +1603,6 @@ paths:
   /auth/logout:
     delete:
       operationId: AuthController_logout
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -1640,8 +1610,6 @@ paths:
   /clients:
     post:
       operationId: ClientsController_create
-      summary: ''
-      description: ''
       parameters: []
       requestBody:
         required: true
@@ -1658,8 +1626,6 @@ paths:
                 $ref: '#/components/schemas/ReturnedClientDto'
     get:
       operationId: ClientsController_findOne
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -1671,8 +1637,6 @@ paths:
   /clients/clerkWebhook:
     post:
       operationId: ClientsController_clerkWebhook
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '201':
@@ -1684,8 +1648,6 @@ paths:
   /clients/byId/{id}:
     get:
       operationId: ClientsController_findById
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1703,8 +1665,6 @@ paths:
   /clients/api-key:
     get:
       operationId: ClientsController_getApiKey
-      summary: ''
-      description: ''
       parameters: []
       responses:
         '200':
@@ -1712,8 +1672,6 @@ paths:
   /clients/{id}:
     patch:
       operationId: ClientsController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1736,8 +1694,6 @@ paths:
                 $ref: '#/components/schemas/ReturnedClientDto'
     delete:
       operationId: ClientsController_remove
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1838,8 +1794,6 @@ paths:
   /email/request:
     post:
       operationId: EmailController_requestVerificationEmail
-      summary: ''
-      description: ''
       parameters:
         - name: email
           required: true
@@ -1852,8 +1806,6 @@ paths:
   /email/verify:
     get:
       operationId: EmailController_verifyEmail
-      summary: ''
-      description: ''
       parameters:
         - name: is_pr
           required: true
@@ -1883,8 +1835,6 @@ paths:
   /policies:
     post:
       operationId: PoliciesController_create
-      summary: ''
-      description: ''
       parameters: []
       requestBody:
         required: true
@@ -1898,8 +1848,6 @@ paths:
   /policies/account/{accountId}:
     get:
       operationId: PoliciesController_findAll
-      summary: ''
-      description: ''
       parameters:
         - name: accountId
           required: true
@@ -1918,8 +1866,6 @@ paths:
   /policies/byId/{id}:
     get:
       operationId: PoliciesController_findOne
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1937,8 +1883,6 @@ paths:
   /policies/{id}:
     patch:
       operationId: PoliciesController_update
-      summary: ''
-      description: ''
       parameters:
         - name: id
           required: true
@@ -1955,6 +1899,10 @@ paths:
       responses:
         '200':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedPolicyDto'
 info:
   title: Bruinen API
   description: The API for bruinen
@@ -1965,19 +1913,38 @@ info:
     email: info@bruinen.xyz
 tags: []
 servers:
-  - url: https://api.bruinen.xyz
+  - url: http://localhost:3000
 components:
   schemas:
     CreateUserDto:
       type: object
       properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
         Account:
           type: object
       required:
         - Account
     ReturnedUserDto:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        Account:
+          type: object
+      required:
+        - id
+        - Account
     FindOrCreateUserDto:
       type: object
       properties:
@@ -1987,31 +1954,80 @@ components:
           type: string
       required:
         - email
-    User:
-      type: object
-      properties:
-        createdAt:
-          type: object
-        updatedAt:
-          type: object
-        Account:
-          type: object
-      required:
-        - createdAt
-        - updatedAt
-        - Account
     UpdateUserDto:
       type: object
       properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
         Account:
           type: object
       required:
         - Account
+    SourceType:
+      type: string
+      enum:
+        - twitter
+        - ethereum
+        - polygon
+        - facebook
+        - linkedin
+        - github
+        - email
+        - spotify
+        - stackoverflow
+        - discord
+        - dunkin
+        - venmo
+        - shopify
+        - cashapp
+        - gmail
+        - gcalendar
+        - amazon
+        - google
+    AccountStatus:
+      type: string
+      enum:
+        - active
+        - inactive
+        - pending
+        - removed
+    AccessType:
+      type: string
+      enum:
+        - oAuth2
+        - basicAuth
+        - ethereum
+        - ApiKey
     ReturnedAccountDto:
       type: object
       properties:
+        id:
+          type: string
+        source:
+          $ref: '#/components/schemas/SourceType'
+        name:
+          type: string
+        link:
+          type: string
+        externalAccountId:
+          type: string
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        userId:
+          type: string
+        accessType:
+          $ref: '#/components/schemas/AccessType'
         authUrl:
           type: string
+      required:
+        - id
+        - source
+        - status
+        - userId
     TwitterProfile:
       type: object
       properties:
@@ -2544,6 +2560,415 @@ components:
         - via
         - video_buying_eligibility
         - width
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+        about:
+          type: string
+        access_token:
+          type: string
+        ad_campaign:
+          type: string
+        affiliation:
+          type: string
+        app_id:
+          type: string
+        app_links:
+          type: string
+        artists_we_like:
+          type: string
+        attire:
+          type: string
+        awards:
+          type: string
+        band_interests:
+          type: string
+        bio:
+          type: string
+        birthday:
+          type: string
+        booking_agent:
+          type: string
+        built:
+          type: string
+        business:
+          type: string
+        can_checkin:
+          type: boolean
+        can_post:
+          type: boolean
+        category:
+          type: string
+        category_list:
+          type: string
+        checkins:
+          type: number
+        company_overview:
+          type: string
+        connected_instagram_account:
+          type: string
+        contact_address:
+          type: string
+        context:
+          type: string
+        country_page_likes:
+          type: number
+        cover:
+          type: string
+        culinary_team:
+          type: string
+        current_location:
+          type: string
+        description:
+          type: string
+        description_html:
+          type: string
+        directed_by:
+          type: string
+        display_subtext:
+          type: string
+        displayed_message_response_time:
+          type: string
+        emails:
+          type: string
+        engagement:
+          type: string
+        fan_count:
+          type: number
+        featured_video:
+          type: string
+        features:
+          type: string
+        food_styles:
+          type: string
+        founded:
+          type: string
+        general_info:
+          type: string
+        general_manager:
+          type: string
+        genre:
+          type: string
+        global_brand_page_name:
+          type: string
+        global_brand_root_id:
+          type: string
+        has_added_app:
+          type: boolean
+        has_whatsapp_business_number:
+          type: boolean
+        has_whatsapp_number:
+          type: boolean
+        hometown:
+          type: string
+        hours:
+          type: string
+        impressum:
+          type: string
+        influences:
+          type: string
+        instagram_business_account:
+          type: string
+        instant_articles_review_status:
+          type: string
+        is_always_open:
+          type: boolean
+        is_chain:
+          type: boolean
+        is_community_page:
+          type: boolean
+        is_eligible_for_branded_content:
+          type: boolean
+        is_messenger_bot_get_started_enabled:
+          type: boolean
+        is_messenger_platform_bot:
+          type: boolean
+        is_owned:
+          type: boolean
+        is_permanently_closed:
+          type: boolean
+        is_published:
+          type: boolean
+        is_unclaimed:
+          type: boolean
+        is_verified:
+          type: boolean
+        is_webhooks_subscribed:
+          type: boolean
+        keywords:
+          type: string
+        leadgen_form_preview_details:
+          type: string
+        leadgen_has_crm_integration:
+          type: boolean
+        leadgen_has_fat_ping_crm_integration:
+          type: boolean
+        leadgen_tos_acceptance_time:
+          type: string
+        leadgen_tos_accepted:
+          type: boolean
+        leadgen_tos_accepting_user:
+          type: string
+        link:
+          type: string
+        location:
+          type: string
+        members:
+          type: string
+        merchant_id:
+          type: string
+        merchant_review_status:
+          type: string
+        messenger_ads_default_icebreakers:
+          type: string
+        messenger_ads_default_page_welcome_message:
+          type: string
+        messenger_ads_default_quick_replies:
+          type: string
+        mission:
+          type: string
+        mpg:
+          type: string
+        name:
+          type: string
+        name_with_location_descriptor:
+          type: string
+        network:
+          type: string
+        new_like_count:
+          type: number
+        offer_eligible:
+          type: boolean
+        overall_star_rating:
+          type: string
+        page_token:
+          type: string
+        parking:
+          type: string
+        payment_options:
+          type: string
+        personal_info:
+          type: string
+        personal_interests:
+          type: string
+        pharma_safety_info:
+          type: string
+        phone:
+          type: string
+        place_type:
+          type: string
+        plot_outline:
+          type: string
+        preferred_audience:
+          type: string
+        press_contact:
+          type: string
+        price_range:
+          type: string
+        produced_by:
+          type: string
+        products:
+          type: string
+        promotion_eligible:
+          type: boolean
+        promotion_ineligible_reason:
+          type: string
+        public_transic:
+          type: string
+        rating_count:
+          type: number
+        recipient:
+          type: string
+        record_label:
+          type: string
+        release_date:
+          type: string
+        restaurant_services:
+          type: string
+        restaurant_specialties:
+          type: string
+        schedule:
+          type: string
+        screenplay_by:
+          type: string
+        season:
+          type: string
+        single_line_address:
+          type: string
+        starring:
+          type: string
+        start_info:
+          type: string
+        store_code:
+          type: string
+        store_location_descriptor:
+          type: string
+        store_number:
+          type: string
+        studio:
+          type: string
+        supports_instant_articles:
+          type: boolean
+        talking_about_count:
+          type: number
+        temporary_status:
+          type: string
+        unread_message_count:
+          type: number
+        unread_notif_count:
+          type: number
+        unseen_message_count:
+          type: number
+        username:
+          type: string
+        verification_status:
+          type: string
+        voip_info:
+          type: string
+        website:
+          type: string
+        were_here_count:
+          type: number
+        written_by:
+          type: string
+      required:
+        - id
+        - about
+        - access_token
+        - ad_campaign
+        - affiliation
+        - app_id
+        - app_links
+        - artists_we_like
+        - attire
+        - awards
+        - band_interests
+        - bio
+        - birthday
+        - booking_agent
+        - built
+        - business
+        - can_checkin
+        - can_post
+        - category
+        - category_list
+        - checkins
+        - company_overview
+        - connected_instagram_account
+        - contact_address
+        - context
+        - country_page_likes
+        - cover
+        - culinary_team
+        - current_location
+        - description
+        - description_html
+        - directed_by
+        - display_subtext
+        - displayed_message_response_time
+        - emails
+        - engagement
+        - fan_count
+        - featured_video
+        - features
+        - food_styles
+        - founded
+        - general_info
+        - general_manager
+        - genre
+        - global_brand_page_name
+        - global_brand_root_id
+        - has_added_app
+        - has_whatsapp_business_number
+        - has_whatsapp_number
+        - hometown
+        - hours
+        - impressum
+        - influences
+        - instagram_business_account
+        - instant_articles_review_status
+        - is_always_open
+        - is_chain
+        - is_community_page
+        - is_eligible_for_branded_content
+        - is_messenger_bot_get_started_enabled
+        - is_messenger_platform_bot
+        - is_owned
+        - is_permanently_closed
+        - is_published
+        - is_unclaimed
+        - is_verified
+        - is_webhooks_subscribed
+        - keywords
+        - leadgen_form_preview_details
+        - leadgen_has_crm_integration
+        - leadgen_has_fat_ping_crm_integration
+        - leadgen_tos_acceptance_time
+        - leadgen_tos_accepted
+        - leadgen_tos_accepting_user
+        - link
+        - location
+        - members
+        - merchant_id
+        - merchant_review_status
+        - messenger_ads_default_icebreakers
+        - messenger_ads_default_page_welcome_message
+        - messenger_ads_default_quick_replies
+        - mission
+        - mpg
+        - name
+        - name_with_location_descriptor
+        - network
+        - new_like_count
+        - offer_eligible
+        - overall_star_rating
+        - page_token
+        - parking
+        - payment_options
+        - personal_info
+        - personal_interests
+        - pharma_safety_info
+        - phone
+        - place_type
+        - plot_outline
+        - preferred_audience
+        - press_contact
+        - price_range
+        - produced_by
+        - products
+        - promotion_eligible
+        - promotion_ineligible_reason
+        - public_transic
+        - rating_count
+        - recipient
+        - record_label
+        - release_date
+        - restaurant_services
+        - restaurant_specialties
+        - schedule
+        - screenplay_by
+        - season
+        - single_line_address
+        - starring
+        - start_info
+        - store_code
+        - store_location_descriptor
+        - store_number
+        - studio
+        - supports_instant_articles
+        - talking_about_count
+        - temporary_status
+        - unread_message_count
+        - unread_notif_count
+        - unseen_message_count
+        - username
+        - verification_status
+        - voip_info
+        - website
+        - were_here_count
+        - written_by
     FacebookPage:
       type: object
       properties:
@@ -2570,7 +2995,7 @@ components:
         band_interests:
           type: string
         best_page:
-          type: object
+          $ref: '#/components/schemas/Page'
         bio:
           type: string
         birthday:
@@ -2732,7 +3157,7 @@ components:
         page_token:
           type: string
         parent_page:
-          type: object
+          $ref: '#/components/schemas/Page'
         parking:
           type: string
         payment_options:
@@ -2959,6 +3384,129 @@ components:
         - website
         - were_here_count
         - written_by
+    FacebookPlatformImageSource:
+      type: object
+      properties:
+        height:
+          type: number
+        source:
+          type: string
+        width:
+          type: number
+      required:
+        - height
+        - source
+        - width
+    FacebookNameTag:
+      type: object
+      properties:
+        id:
+          type: string
+        length:
+          type: number
+        name:
+          type: string
+        object:
+          $ref: '#/components/schemas/FacebookProfile'
+        offset:
+          type: number
+        type:
+          type: string
+      required:
+        - id
+        - length
+        - name
+        - object
+        - offset
+        - type
+    CoverPhoto:
+      type: object
+      properties:
+        id:
+          type: string
+        alt_text:
+          type: string
+        alt_text_custom:
+          type: string
+        backdated_time:
+          type: string
+        backdated_time_granularity:
+          type: string
+        can_backdate:
+          type: boolean
+        can_delete:
+          type: boolean
+        can_tag:
+          type: boolean
+        created_time:
+          type: string
+        event:
+          $ref: '#/components/schemas/FacebookEvent'
+        from:
+          $ref: '#/components/schemas/FacebookProfile'
+        height:
+          type: number
+        icon:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookPlatformImageSource'
+        link:
+          type: string
+        name:
+          type: string
+        name_tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookNameTag'
+        page_story_id:
+          type: string
+        picture:
+          type: string
+        place:
+          $ref: '#/components/schemas/FacebookPlace'
+        position:
+          type: number
+        source:
+          type: string
+        target:
+          $ref: '#/components/schemas/FacebookProfile'
+        updated_time:
+          type: string
+        webp_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookPlatformImageSource'
+        width:
+          type: number
+      required:
+        - id
+        - alt_text
+        - alt_text_custom
+        - backdated_time
+        - backdated_time_granularity
+        - can_backdate
+        - can_delete
+        - can_tag
+        - created_time
+        - event
+        - from
+        - height
+        - icon
+        - images
+        - link
+        - name
+        - name_tags
+        - page_story_id
+        - picture
+        - place
+        - position
+        - source
+        - target
+        - updated_time
+        - webp_images
+        - width
     FacebookAlbum:
       type: object
       properties:
@@ -2975,7 +3523,7 @@ components:
         count:
           type: number
         cover_photo:
-          type: object
+          $ref: '#/components/schemas/CoverPhoto'
         created_time:
           type: string
         description:
@@ -3029,41 +3577,6 @@ components:
         - privacy
         - type
         - updated_time
-    FacebookPlatformImageSource:
-      type: object
-      properties:
-        height:
-          type: number
-        source:
-          type: string
-        width:
-          type: number
-      required:
-        - height
-        - source
-        - width
-    FacebookNameTag:
-      type: object
-      properties:
-        id:
-          type: string
-        length:
-          type: number
-        name:
-          type: string
-        object:
-          $ref: '#/components/schemas/FacebookProfile'
-        offset:
-          type: number
-        type:
-          type: string
-      required:
-        - id
-        - length
-        - name
-        - object
-        - offset
-        - type
     FacebookPhoto:
       type: object
       properties:
@@ -3726,11 +4239,24 @@ components:
         - locale
         - mfa_enabled
         - premium_type
+    StackoverflowBadgeCount:
+      type: object
+      properties:
+        bronze:
+          type: number
+        gold:
+          type: number
+        silver:
+          type: number
+      required:
+        - bronze
+        - gold
+        - silver
     StackoverflowProfile:
       type: object
       properties:
         badge_counts:
-          type: object
+          $ref: '#/components/schemas/StackoverflowBadgeCount'
         view_count:
           type: number
         down_vote_count:
@@ -4254,6 +4780,22 @@ components:
         - email
         - primary
         - __typename
+    User:
+      type: object
+      properties:
+        userId:
+          type: string
+        emailVerificationRequired:
+          type: boolean
+        canSignIn:
+          type: boolean
+        signInMethod:
+          type: string
+      required:
+        - userId
+        - emailVerificationRequired
+        - canSignIn
+        - signInMethod
     ShopifyAccountsExternal:
       type: object
       properties:
@@ -4850,6 +5392,27 @@ components:
         - attachmentId
         - size
         - data
+    SubMessagePart:
+      type: object
+      properties:
+        partId:
+          type: string
+        mimeType:
+          type: string
+        filename:
+          type: string
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+        body:
+          $ref: '#/components/schemas/MessagePartBody'
+      required:
+        - partId
+        - mimeType
+        - filename
+        - headers
+        - body
     MessagePart:
       type: object
       properties:
@@ -4868,7 +5431,7 @@ components:
         parts:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/SubMessagePart'
       required:
         - partId
         - mimeType
@@ -5805,13 +6368,45 @@ components:
         - accessToken
     CreateClientDto:
       type: object
-      properties: {}
+      properties:
+        name:
+          type: string
+        clerkId:
+          type: string
+      required:
+        - name
+    ClientStatus:
+      type: string
+      enum:
+        - active
+        - removed
     ReturnedClientDto:
       type: object
-      properties: {}
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        clerkId:
+          type: string
+        status:
+          $ref: '#/components/schemas/ClientStatus'
+      required:
+        - id
+        - name
+        - status
     UpdateClientDto:
       type: object
-      properties: {}
+      properties:
+        name:
+          type: string
+        clerkId:
+          type: string
+        status:
+          $ref: '#/components/schemas/ClientStatus'
+      required:
+        - name
+        - status
     CreateConnectionRequestDto:
       type: object
       properties:
@@ -5875,24 +6470,45 @@ components:
         - isPublic
         - isAllAccess
         - permittedMethods
+    AccountPolicyStatus:
+      type: string
+      enum:
+        - active
+        - revoked
     ReturnedPolicyDto:
       type: object
       properties:
-        createdAt:
-          type: object
-        updatedAt:
-          type: object
+        id:
+          type: string
+        accountId:
+          type: string
         clientId:
-          type: object
+          type: string
+        status:
+          $ref: '#/components/schemas/AccountPolicyStatus'
+        isPublic:
+          type: boolean
+        isAllAccess:
+          type: boolean
         permittedMethods:
           type: array
           items:
             type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
       required:
+        - id
+        - accountId
+        - status
+        - isPublic
+        - isAllAccess
+        - permittedMethods
         - createdAt
         - updatedAt
-        - clientId
-        - permittedMethods
     UpdatePolicyDto:
       type: object
       properties:
