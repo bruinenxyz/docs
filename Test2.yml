@@ -1,0 +1,5912 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /users:
+    post:
+      operationId: UsersController_create
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedUserDto'
+    get:
+      operationId: UsersController_findUserFromToken
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedUserDto'
+  /users/find-or-create:
+    post:
+      operationId: UsersController_findOrCreateUser
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindOrCreateUserDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedUserDto'
+  /users/byId/{id}:
+    get:
+      operationId: UsersController_findOne
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/all:
+    get:
+      operationId: UsersController_findAll
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /users/{id}:
+    patch:
+      operationId: UsersController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedUserDto'
+    delete:
+      operationId: UsersController_remove
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /accounts/callback/{source}:
+    get:
+      operationId: AccountsController_getAuthCallback
+      parameters:
+        - name: source
+          required: true
+          in: path
+          description: The source of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+  /accounts/auth/{source}:
+    post:
+      operationId: AccountsController_auth
+      parameters:
+        - name: source
+          required: true
+          in: path
+          description: The source of the account
+          schema: {}
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+  /accounts/{id}:
+    get:
+      operationId: AccountsController_getAccount
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedAccountDto'
+    patch:
+      operationId: AccountsController_updateAccount
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedAccountDto'
+  /accounts/user/{userId}:
+    get:
+      operationId: AccountsController_findAllAccountsForUser
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: The id of the user
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReturnedAccountDto'
+  /accounts/deactivate/{accountId}:
+    post:
+      operationId: AccountsController_deactivateAccount
+      parameters:
+        - name: accountId
+          required: true
+          in: path
+          description: The id of the account
+          schema: {}
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+  /sources/twitter/profile:
+    get:
+      operationId: TwitterController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwitterProfile'
+      tags: &ref_0
+        - sources
+  /sources/twitter/tweets:
+    get:
+      operationId: TwitterController_getTweets
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterTweet'
+      tags: *ref_0
+  /sources/twitter/likedTweets:
+    get:
+      operationId: TwitterController_getLikedTweets
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterTweet'
+      tags: *ref_0
+  /sources/twitter/mentionTweets:
+    get:
+      operationId: TwitterController_getMentionTweets
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterTweet'
+      tags: *ref_0
+  /sources/twitter/followers:
+    get:
+      operationId: TwitterController_getFollowers
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterFollower'
+      tags: *ref_0
+  /sources/twitter/following:
+    get:
+      operationId: TwitterController_getFollowing
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterFollower'
+      tags: *ref_0
+  /sources/twitter/pinnedTweets:
+    get:
+      operationId: TwitterController_getPinnedTweets
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterTweet'
+      tags: *ref_0
+  /sources/twitter/dms:
+    get:
+      operationId: TwitterController_getDMs
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterDM'
+      tags: *ref_0
+  /sources/twitter/usersDetails:
+    get:
+      operationId: TwitterController_getUsersDetails
+      parameters:
+        - name: ids
+          required: true
+          in: query
+          description: Ids of users to get details for
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TwitterProfile'
+      tags: *ref_0
+  /sources/twitter/sendDm:
+    post:
+      operationId: TwitterController_sendDM
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDM'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TwitterDMDetails'
+      tags: *ref_0
+  /sources/twitter/metadata:
+    get:
+      operationId: TwitterController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_0
+  /sources/facebook/profile:
+    get:
+      operationId: FacebookController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacebookProfile'
+      tags: &ref_1
+        - sources
+  /sources/facebook/posts:
+    get:
+      operationId: FacebookController_getPosts
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FacebookPost'
+      tags: *ref_1
+  /sources/facebook/friends:
+    get:
+      operationId: FacebookController_getFriends
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FacebookProfile'
+      tags: *ref_1
+  /sources/facebook/likedPages:
+    get:
+      operationId: FacebookController_getLikedPages
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FacebookPage'
+      tags: *ref_1
+  /sources/facebook/photos:
+    get:
+      operationId: FacebookController_getPhotos
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FacebookPhoto'
+      tags: *ref_1
+  /sources/facebook/metadata:
+    get:
+      operationId: FacebookController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_1
+  /sources/ethereum/nfts:
+    get:
+      operationId: EthereumController_getNfts
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ethereumNfts'
+      tags: &ref_2
+        - sources
+  /sources/ethereum/balance:
+    get:
+      operationId: EthereumController_getBalance
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_2
+  /sources/ethereum/transactionsCount:
+    get:
+      operationId: EthereumController_getTransactions
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: number
+      tags: *ref_2
+  /sources/polygon/nfts:
+    get:
+      operationId: PolygonController_getNfts
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/polygonNfts'
+      tags: &ref_3
+        - sources
+  /sources/polygon/balance:
+    get:
+      operationId: PolygonController_getBalance
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_3
+  /sources/polygon/transactionsCount:
+    get:
+      operationId: PolygonController_getTransactions
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: number
+      tags: *ref_3
+  /sources/linkedin/profile:
+    get:
+      operationId: LinkedinController_getProfile
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkedinProfile'
+      tags: &ref_4
+        - sources
+  /sources/linkedin/metadata:
+    get:
+      operationId: LinkedinController_getMetadata
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_4
+  /sources/spotify/profile:
+    get:
+      operationId: SpotifyController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpotifyProfile'
+      tags: &ref_5
+        - sources
+  /sources/spotify/playlists:
+    get:
+      operationId: SpotifyController_getPlaylists
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpotifyPlaylist'
+      tags: *ref_5
+  /sources/spotify/metadata:
+    get:
+      operationId: SpotifyController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_5
+  /sources/github/profile:
+    get:
+      operationId: GithubController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GithubProfile'
+      tags: &ref_6
+        - sources
+  /sources/github/repos:
+    get:
+      operationId: GithubController_getRepositories
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GithubRepository'
+      tags: *ref_6
+  /sources/github/starredRepos:
+    get:
+      operationId: GithubController_getStarredRepos
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GithubRepository'
+      tags: *ref_6
+  /sources/github/metadata:
+    get:
+      operationId: GithubController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *ref_6
+  /sources/discord/profile:
+    get:
+      operationId: DiscordController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscordProfile'
+      tags: &ref_7
+        - sources
+  /sources/discord/metadata:
+    get:
+      operationId: DiscordController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *ref_7
+  /sources/stackoverflow/profile:
+    get:
+      operationId: StackoverflowController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StackoverflowProfile'
+      tags: &ref_8
+        - sources
+  /sources/stackoverflow/posts:
+    get:
+      operationId: StackoverflowController_getQuestions
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StackoverflowPost'
+      tags: *ref_8
+  /sources/stackoverflow/metadata:
+    get:
+      operationId: StackoverflowController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_8
+  /sources/venmo/profile:
+    get:
+      operationId: VenmoController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenmoProfile'
+      tags: &ref_9
+        - sources
+  /sources/venmo/friends:
+    get:
+      operationId: VenmoController_getFriends
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenmoFriends'
+      tags: *ref_9
+  /sources/venmo/transactions:
+    get:
+      operationId: VenmoController_getTransactions
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenmoTransactions'
+      tags: *ref_9
+  /sources/venmo/metadata:
+    get:
+      operationId: VenmoController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_9
+  /sources/shopify/metadata:
+    get:
+      operationId: ShopifyController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_10
+        - sources
+  /sources/shopify/profile:
+    get:
+      operationId: ShopifyController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyProfile'
+      tags: *ref_10
+  /sources/shopify/accounts:
+    get:
+      operationId: ShopifyController_getAccounts
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyAccountsExternal'
+      tags: *ref_10
+  /sources/shopify/cart:
+    get:
+      operationId: ShopifyController_getCart
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyCart'
+      tags: *ref_10
+  /sources/shopify/followedShops:
+    get:
+      operationId: ShopifyController_getFollowedShops
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyFollowedShops'
+      tags: *ref_10
+  /sources/shopify/favorites:
+    get:
+      operationId: ShopifyController_getFavorites
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyFavorites'
+      tags: *ref_10
+  /sources/shopify/orders:
+    get:
+      operationId: ShopifyController_getOrders
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopifyOrders'
+      tags: *ref_10
+  /sources/cashapp/metadata:
+    get:
+      operationId: CashappController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_11
+        - sources
+  /sources/cashapp/profile:
+    get:
+      operationId: CashappController_getProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashappProfile'
+      tags: *ref_11
+  /sources/google/metadata:
+    get:
+      operationId: GoogleController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: &ref_12
+        - sources
+  /sources/google/gmailProfile:
+    get:
+      operationId: GoogleController_getGmailProfile
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailProfile'
+      tags: *ref_12
+  /sources/google/gmailDrafts:
+    get:
+      operationId: GoogleController_getGmailDrafts
+      parameters:
+        - name: query
+          required: true
+          in: query
+          description: Only return draft messages matching the specified query
+          schema: {}
+        - name: pageToken
+          required: true
+          in: query
+          description: The pageToken for the page of drafts
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailDrafts'
+      tags: *ref_12
+  /sources/google/gmailDraft:
+    get:
+      operationId: GoogleController_getGmailDraft
+      parameters:
+        - name: draftId
+          required: true
+          in: query
+          description: The id of the draft
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailDraft'
+      tags: *ref_12
+  /sources/google/gmailLabels:
+    get:
+      operationId: GoogleController_getGmailLabels
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailLabels'
+      tags: *ref_12
+  /sources/google/gmailLabel:
+    get:
+      operationId: GoogleController_getGmailLabel
+      parameters:
+        - name: labelId
+          required: true
+          in: query
+          description: The id of the label
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailLabel'
+      tags: *ref_12
+  /sources/google/gmailMessages:
+    get:
+      operationId: GoogleController_getGmailMessages
+      parameters:
+        - name: labelIds
+          required: true
+          in: query
+          description: Only return draft messages matching the specified label ids
+          schema: {}
+        - name: query
+          required: true
+          in: query
+          description: Only return draft messages matching the specified query
+          schema: {}
+        - name: pageToken
+          required: true
+          in: query
+          description: The pageToken for the page of drafts
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailMessages'
+      tags: *ref_12
+  /sources/google/gmailMessage:
+    get:
+      operationId: GoogleController_getGmailMessage
+      parameters:
+        - name: messageId
+          required: true
+          in: query
+          description: The id of the message
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailMessage'
+      tags: *ref_12
+  /sources/google/gmailThreads:
+    get:
+      operationId: GoogleController_getGmailThreads
+      parameters:
+        - name: labelIds
+          required: true
+          in: query
+          description: Only return draft messages matching the specified label ids
+          schema: {}
+        - name: query
+          required: true
+          in: query
+          description: Only return draft messages matching the specified query
+          schema: {}
+        - name: pageToken
+          required: true
+          in: query
+          description: The pageToken for the page of drafts
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailThreads'
+      tags: *ref_12
+  /sources/google/gmailThread:
+    get:
+      operationId: GoogleController_getGmailThread
+      parameters:
+        - name: threadId
+          required: true
+          in: query
+          description: The id of the thread
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GmailThread'
+      tags: *ref_12
+  /sources/google/googleCalendars:
+    get:
+      operationId: GoogleController_getGoogleCalendars
+      parameters:
+        - name: syncToken
+          required: true
+          in: query
+          description: >-
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then.
+          schema: {}
+        - name: showHidden
+          required: true
+          in: query
+          description: Whether to show hidden entries. Optional. The default is False.
+          schema: {}
+        - name: showDeleted
+          required: true
+          in: query
+          description: >-
+            Whether to include deleted calendar list entries in the result.
+            Optional. The default is False.
+          schema: {}
+        - name: pageToken
+          required: true
+          in: query
+          description: The pageToken for the page of calendars
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcalendarCalendarList'
+      tags: *ref_12
+  /sources/google/googleCalendar:
+    get:
+      operationId: GoogleController_getGoogleCalendar
+      parameters:
+        - name: calendarId
+          required: true
+          in: query
+          description: The id of the calendar
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcalendarCalendar'
+      tags: *ref_12
+  /sources/google/googleEvents:
+    get:
+      operationId: GoogleController_getGoogleEvents
+      parameters:
+        - name: iCalUID
+          required: true
+          in: query
+          description: >-
+            Specifies an event ID in the iCalendar format to be provided in the
+            response. Optional. Use this if you want to search for an event by
+            its iCalendar ID.
+          schema: {}
+        - name: syncToken
+          required: true
+          in: query
+          description: >-
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. All events deleted since the previous list request will always
+            be in the result set and it is not allowed to set showDeleted to
+            False. There are several query parameters that cannot be specified
+            together with nextSyncToken to ensure consistency of the client
+            state:
+
+            1. orderBy
+
+            2. query
+
+            3. timeMin
+
+            4. timeMax
+
+            5. updatedMin
+
+            If the syncToken expires, the server will respond with a 410 GONE
+            response code and the client should clear its storage and perform a
+            full synchronization without any syncToken. Optional. The default is
+            to return all entries.
+          schema: {}
+        - name: updatedMin
+          required: true
+          in: query
+          description: >-
+            Lower bound for an event's last modification time (as a RFC3339
+            timestamp) to filter by. When specified, entries deleted since this
+            time will always be included regardless of showDeleted. Optional.
+            The default is not to filter by last modification time.
+          schema: {}
+        - name: timeZone
+          required: true
+          in: query
+          description: >-
+            Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
+          schema: {}
+        - name: timeMin
+          required: true
+          in: query
+          description: >-
+            Lower bound (exclusive) for an event's end time to filter by.
+            Optional. The default is not to filter by end time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMax is set, timeMin must be smaller
+            than timeMax.
+          schema: {}
+        - name: timeMax
+          required: true
+          in: query
+          description: >-
+            Upper bound (exclusive) for an event's start time to filter by.
+            Optional. The default is not to filter by start time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMin is set, timeMax must be greater
+            than timeMin.
+          schema: {}
+        - name: singleEvents
+          required: true
+          in: query
+          description: >-
+            Whether to expand recurring events into instances and only return
+            single one-off events and instances of recurring events, but not the
+            underlying recurring events themselves. Optional. The default is
+            False.
+          schema: {}
+        - name: showDeleted
+          required: true
+          in: query
+          description: >-
+            Whether to include deleted events (with status equals 'cancelled')
+            in the result. Optional. The default is False.
+          schema: {}
+        - name: query
+          required: true
+          in: query
+          description: >-
+            Free text search terms to find events that match these terms in the
+            following fields: summary, description, location, attendee's
+            displayName, attendee's email. Optional.
+          schema: {}
+        - name: pageToken
+          required: true
+          in: query
+          description: Token specifying which result page to return. Optional.
+          schema: {}
+        - name: orderBy
+          required: true
+          in: query
+          description: >-
+            The order of the events returned in the result. Optional. The
+            default is an unspecified, stable order. Acceptable values are: 1.
+            `startTime`: Order by the start date/time (ascending). This is only
+            available when querying single events (i.e. the parameter
+            singleEvents is True) 2. 'updated': Order by last modification time
+            (ascending).
+          schema: {}
+        - name: maxAttendees
+          required: true
+          in: query
+          description: >-
+            The maximum number of attendees to include in the response. If there
+            are more than the specified number of attendees, only the
+            participant is returned. Optional.
+          schema: {}
+        - name: calendarId
+          required: true
+          in: query
+          description: The id of the calendar
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcalendarEventsList'
+      tags: *ref_12
+  /sources/google/googleEvent:
+    get:
+      operationId: GoogleController_getGoogleEvent
+      parameters:
+        - name: timeZone
+          required: true
+          in: query
+          description: >-
+            Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
+          schema: {}
+        - name: maxAttendees
+          required: true
+          in: query
+          description: >-
+            The maximum number of attendees to include in the response. If there
+            are more than the specified number of attendees, only the
+            participant is returned. Optional.
+          schema: {}
+        - name: eventId
+          required: true
+          in: query
+          description: The id of the event
+          schema: {}
+        - name: calendarId
+          required: true
+          in: query
+          description: The id of the calendar
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcalendarEvent'
+      tags: *ref_12
+  /sources/amazon/metadata:
+    get:
+      operationId: AmazonController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_13
+        - sources
+  /sources/amazon/orders:
+    get:
+      operationId: AmazonController_getOrders
+      parameters:
+        - name: allOrders
+          required: true
+          in: query
+          description: Return all orders on the account. Optional. Defaults to false
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmazonOrders'
+      tags: *ref_13
+  /sources/amazon/order:
+    get:
+      operationId: AmazonController_getOrder
+      parameters:
+        - name: orderId
+          required: true
+          in: query
+          description: The id of the order
+          schema: {}
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmazonOrder'
+      tags: *ref_13
+  /sources/amazon/addresses:
+    get:
+      operationId: AmazonController_getAddresses
+      parameters:
+        - name: accountId
+          required: true
+          in: query
+          description: The account id of the account
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmazonAddresses'
+      tags: *ref_13
+  /auth/{userId}:
+    get:
+      operationId: AuthController_getUserAuthToken
+      summary: ''
+      description: ''
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: Id of user attempting to log in
+          schema: {}
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Auth'
+  /auth/logout:
+    delete:
+      operationId: AuthController_logout
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /clients:
+    post:
+      operationId: ClientsController_create
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClientDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedClientDto'
+    get:
+      operationId: ClientsController_findOne
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedClientDto'
+  /clients/clerkWebhook:
+    post:
+      operationId: ClientsController_clerkWebhook
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+  /clients/byId/{id}:
+    get:
+      operationId: ClientsController_findById
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the client
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedClientDto'
+  /clients/api-key:
+    get:
+      operationId: ClientsController_getApiKey
+      summary: ''
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /clients/{id}:
+    patch:
+      operationId: ClientsController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the client
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClientDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedClientDto'
+    delete:
+      operationId: ClientsController_remove
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the client
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /connection-requests:
+    post:
+      operationId: ConnectionRequestsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequestDto'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedConnectionRequestDto'
+    get:
+      operationId: ConnectionRequestsController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /connection-requests/byId/{id}:
+    get:
+      operationId: ConnectionRequestsController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the connection request
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /connection-requests/{id}:
+    patch:
+      operationId: ConnectionRequestsController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the connection request
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionRequestDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+    delete:
+      operationId: ConnectionRequestsController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the connection request
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: string
+  /email/request:
+    post:
+      operationId: EmailController_requestVerificationEmail
+      summary: ''
+      description: ''
+      parameters:
+        - name: email
+          required: true
+          in: query
+          description: Email used to attempt user registration
+          schema: {}
+      responses:
+        '201':
+          description: ''
+  /email/verify:
+    get:
+      operationId: EmailController_verifyEmail
+      summary: ''
+      description: ''
+      parameters:
+        - name: is_pr
+          required: true
+          in: query
+          description: ''
+          schema: {}
+        - name: code
+          required: true
+          in: query
+          description: ''
+          schema: {}
+        - name: email
+          required: true
+          in: query
+          description: ''
+          schema: {}
+      responses:
+        '200':
+          description: ''
+  /sources/metadata:
+    get:
+      operationId: SourcesController_getMetadata
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /policies:
+    post:
+      operationId: PoliciesController_create
+      summary: ''
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyDto'
+      responses:
+        '201':
+          description: ''
+  /policies/account/{accountId}:
+    get:
+      operationId: PoliciesController_findAll
+      summary: ''
+      description: ''
+      parameters:
+        - name: accountId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReturnedPolicyDto'
+  /policies/byId/{id}:
+    get:
+      operationId: PoliciesController_findOne
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the policy
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReturnedPolicyDto'
+  /policies/{id}:
+    patch:
+      operationId: PoliciesController_update
+      summary: ''
+      description: ''
+      parameters:
+        - name: id
+          required: true
+          in: path
+          description: The id of the policy
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyDto'
+      responses:
+        '200':
+          description: ''
+info:
+  title: Bruinen API
+  description: The API for bruinen
+  version: '1.0'
+  contact:
+    name: Bruinen
+    url: https://bruinen.xyz
+    email: info@bruinen.xyz
+tags: []
+servers:
+  - url: https://api.bruinen.xyz
+components:
+  schemas:
+    CreateUserDto:
+      type: object
+      properties:
+        Account:
+          type: object
+      required:
+        - Account
+    ReturnedUserDto:
+      type: object
+      properties: {}
+    FindOrCreateUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+        externalId:
+          type: string
+      required:
+        - email
+    User:
+      type: object
+      properties:
+        createdAt:
+          type: object
+        updatedAt:
+          type: object
+        Account:
+          type: object
+      required:
+        - createdAt
+        - updatedAt
+        - Account
+    UpdateUserDto:
+      type: object
+      properties:
+        Account:
+          type: object
+      required:
+        - Account
+    ReturnedAccountDto:
+      type: object
+      properties:
+        authUrl:
+          type: string
+    TwitterProfile:
+      type: object
+      properties:
+        public_metrics:
+          type: object
+          properties:
+            followers_count:
+              type: number
+            following_count:
+              type: number
+            tweet_count:
+              type: number
+            listed_count:
+              type: number
+        id:
+          type: string
+        protected:
+          type: boolean
+        url:
+          type: string
+        description:
+          type: string
+        username:
+          type: string
+        name:
+          type: string
+        verified:
+          type: boolean
+        location:
+          type: string
+        profile_image_url:
+          type: string
+        created_at:
+          type: string
+      required:
+        - id
+    TwitterTweet:
+      type: object
+      properties:
+        id:
+          type: string
+        edit_history_tweet_ids:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+      required:
+        - id
+        - edit_history_tweet_ids
+        - text
+    TwitterFollower:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+      required:
+        - id
+        - name
+        - username
+    TwitterDM:
+      type: object
+      properties:
+        event_type:
+          type: string
+        sender_id:
+          type: string
+        id:
+          type: string
+        dm_conversation_id:
+          type: string
+        text:
+          type: string
+      required:
+        - event_type
+        - sender_id
+        - id
+        - dm_conversation_id
+        - text
+    PostDM:
+      type: object
+      properties:
+        conversation_id:
+          type: string
+        message:
+          type: string
+      required:
+        - conversation_id
+        - message
+    TwitterDMDetails:
+      type: object
+      properties:
+        dm_conversation_id:
+          type: string
+        dm_event_id:
+          type: string
+      required:
+        - dm_conversation_id
+        - dm_event_id
+    FacebookProfile:
+      type: object
+      properties:
+        picture:
+          type: object
+          properties:
+            data:
+              type: object
+              properties:
+                height:
+                  type: number
+                is_silhouette:
+                  type: boolean
+                url:
+                  type: string
+                width:
+                  type: number
+        hometown:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        gender:
+          type: string
+        link:
+          type: string
+      required:
+        - picture
+        - hometown
+        - id
+        - name
+        - email
+        - gender
+        - link
+    FacebookCover:
+      type: object
+      properties:
+        id:
+          type: string
+        offset_x:
+          type: number
+        offset_y:
+          type: number
+        source:
+          type: string
+        created_time:
+          type: string
+      required:
+        - id
+        - offset_x
+        - offset_y
+        - source
+        - created_time
+    FacebookGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        email:
+          type: string
+        icon:
+          type: string
+        link:
+          type: string
+        privacy:
+          type: string
+        updated_time:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - email
+        - icon
+        - link
+        - privacy
+        - updated_time
+    FacebookLocation:
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        state:
+          type: string
+        street:
+          type: string
+        zip:
+          type: string
+      required:
+        - city
+        - country
+        - latitude
+        - longitude
+        - state
+        - street
+        - zip
+    FacebookPlace:
+      type: object
+      properties:
+        id:
+          type: string
+        location:
+          $ref: '#/components/schemas/FacebookLocation'
+        name:
+          type: string
+        overall_rating:
+          type: number
+      required:
+        - id
+        - location
+        - name
+        - overall_rating
+    FacebookEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        attending_count:
+          type: number
+        can_guests_invite:
+          type: boolean
+        category:
+          type: string
+        created_time:
+          type: string
+        cover:
+          $ref: '#/components/schemas/FacebookCover'
+        declined_count:
+          type: number
+        description:
+          type: string
+        discount_code_enabled:
+          type: boolean
+        end_time:
+          type: string
+        event_times:
+          type: string
+        guest_list_enabled:
+          type: boolean
+        interested_count:
+          type: number
+        is_canceled:
+          type: boolean
+        is_draft:
+          type: boolean
+        is_online:
+          type: boolean
+        is_page_owned:
+          type: boolean
+        maybe_count:
+          type: number
+        name:
+          type: string
+        noreply_count:
+          type: number
+        online_event_format:
+          type: string
+        online_event_third_party_url:
+          type: string
+        owner:
+          $ref: '#/components/schemas/FacebookProfile'
+        parent_group:
+          $ref: '#/components/schemas/FacebookGroup'
+        place:
+          $ref: '#/components/schemas/FacebookPlace'
+        scheduled_publish_time:
+          type: string
+        start_time:
+          type: string
+        ticket_uri:
+          type: string
+        ticket_uri_start_sales_time:
+          type: string
+        ticketing_privacy_uri:
+          type: string
+        ticketing_terms_uri:
+          type: string
+        timezone:
+          type: string
+        type:
+          type: string
+        updated_time:
+          type: string
+      required:
+        - id
+        - attending_count
+        - can_guests_invite
+        - category
+        - created_time
+        - cover
+        - declined_count
+        - description
+        - discount_code_enabled
+        - end_time
+        - event_times
+        - guest_list_enabled
+        - interested_count
+        - is_canceled
+        - is_draft
+        - is_online
+        - is_page_owned
+        - maybe_count
+        - name
+        - noreply_count
+        - online_event_format
+        - online_event_third_party_url
+        - owner
+        - parent_group
+        - place
+        - scheduled_publish_time
+        - start_time
+        - ticket_uri
+        - ticket_uri_start_sales_time
+        - ticketing_privacy_uri
+        - ticketing_terms_uri
+        - timezone
+        - type
+        - updated_time
+    FacebookPost:
+      type: object
+      properties:
+        id:
+          type: string
+        actions:
+          type: array
+          items:
+            type: string
+        admin_creator:
+          type: string
+        application:
+          type: object
+        call_to_action:
+          type: array
+          items:
+            type: string
+        caption:
+          type: string
+        child_attachments:
+          type: array
+          items:
+            type: string
+        comments_mirroring_domain:
+          type: string
+        created_time:
+          type: string
+        description:
+          type: string
+        event:
+          $ref: '#/components/schemas/FacebookEvent'
+        expanded_height:
+          type: number
+        expanded_width:
+          type: number
+        feed_targeting:
+          type: array
+          items:
+            type: object
+        from:
+          type: array
+          items:
+            type: object
+        full_picture:
+          type: string
+        height:
+          type: number
+        icon:
+          type: string
+        instagram_eligibility:
+          type: string
+        is_app_share:
+          type: boolean
+        is_eligible_for_promotion:
+          type: boolean
+        is_expired:
+          type: boolean
+        is_hidden:
+          type: boolean
+        is_instagram_eligible:
+          type: boolean
+        is_popular:
+          type: boolean
+        is_published:
+          type: boolean
+        is_spherical:
+          type: boolean
+        link:
+          type: string
+        message:
+          type: string
+        message_tags:
+          type: array
+          items:
+            type: string
+        multi_share_end_card:
+          type: boolean
+        multi_share_optimized:
+          type: boolean
+        name:
+          type: string
+        object_id:
+          type: string
+        parent_id:
+          type: string
+        permalink_url:
+          type: string
+        picture:
+          type: string
+        place:
+          $ref: '#/components/schemas/FacebookPlace'
+        privacy:
+          type: array
+          items:
+            type: object
+        promotable_id:
+          type: string
+        properties:
+          type: array
+          items:
+            type: object
+        shares:
+          type: array
+          items:
+            type: number
+        source:
+          type: string
+        status_type:
+          type: string
+        story:
+          type: string
+        story_tags:
+          type: array
+          items:
+            type: object
+        subscribed:
+          type: boolean
+        target:
+          $ref: '#/components/schemas/FacebookProfile'
+        targeting:
+          type: array
+          items:
+            type: object
+        timeline_visibility:
+          type: string
+        type:
+          type: string
+        updated_time:
+          type: string
+        via:
+          type: string
+        video_buying_eligibility:
+          type: array
+          items:
+            type: number
+        width:
+          type: number
+      required:
+        - id
+        - actions
+        - admin_creator
+        - application
+        - call_to_action
+        - caption
+        - child_attachments
+        - comments_mirroring_domain
+        - created_time
+        - description
+        - event
+        - expanded_height
+        - expanded_width
+        - feed_targeting
+        - from
+        - full_picture
+        - height
+        - icon
+        - instagram_eligibility
+        - is_app_share
+        - is_eligible_for_promotion
+        - is_expired
+        - is_hidden
+        - is_instagram_eligible
+        - is_popular
+        - is_published
+        - is_spherical
+        - link
+        - message
+        - message_tags
+        - multi_share_end_card
+        - multi_share_optimized
+        - name
+        - object_id
+        - parent_id
+        - permalink_url
+        - picture
+        - place
+        - privacy
+        - promotable_id
+        - properties
+        - shares
+        - source
+        - status_type
+        - story
+        - story_tags
+        - subscribed
+        - target
+        - targeting
+        - timeline_visibility
+        - type
+        - updated_time
+        - via
+        - video_buying_eligibility
+        - width
+    FacebookPage:
+      type: object
+      properties:
+        id:
+          type: string
+        about:
+          type: string
+        access_token:
+          type: string
+        ad_campaign:
+          type: string
+        affiliation:
+          type: string
+        app_id:
+          type: string
+        app_links:
+          type: string
+        artists_we_like:
+          type: string
+        attire:
+          type: string
+        awards:
+          type: string
+        band_interests:
+          type: string
+        best_page:
+          type: object
+        bio:
+          type: string
+        birthday:
+          type: string
+        booking_agent:
+          type: string
+        built:
+          type: string
+        business:
+          type: string
+        can_checkin:
+          type: boolean
+        can_post:
+          type: boolean
+        category:
+          type: string
+        category_list:
+          type: string
+        checkins:
+          type: number
+        company_overview:
+          type: string
+        connected_instagram_account:
+          type: string
+        contact_address:
+          type: string
+        context:
+          type: string
+        country_page_likes:
+          type: number
+        cover:
+          type: string
+        culinary_team:
+          type: string
+        current_location:
+          type: string
+        description:
+          type: string
+        description_html:
+          type: string
+        directed_by:
+          type: string
+        display_subtext:
+          type: string
+        displayed_message_response_time:
+          type: string
+        emails:
+          type: string
+        engagement:
+          type: string
+        fan_count:
+          type: number
+        featured_video:
+          type: string
+        features:
+          type: string
+        food_styles:
+          type: string
+        founded:
+          type: string
+        general_info:
+          type: string
+        general_manager:
+          type: string
+        genre:
+          type: string
+        global_brand_page_name:
+          type: string
+        global_brand_root_id:
+          type: string
+        has_added_app:
+          type: boolean
+        has_whatsapp_business_number:
+          type: boolean
+        has_whatsapp_number:
+          type: boolean
+        hometown:
+          type: string
+        hours:
+          type: string
+        impressum:
+          type: string
+        influences:
+          type: string
+        instagram_business_account:
+          type: string
+        instant_articles_review_status:
+          type: string
+        is_always_open:
+          type: boolean
+        is_chain:
+          type: boolean
+        is_community_page:
+          type: boolean
+        is_eligible_for_branded_content:
+          type: boolean
+        is_messenger_bot_get_started_enabled:
+          type: boolean
+        is_messenger_platform_bot:
+          type: boolean
+        is_owned:
+          type: boolean
+        is_permanently_closed:
+          type: boolean
+        is_published:
+          type: boolean
+        is_unclaimed:
+          type: boolean
+        is_verified:
+          type: boolean
+        is_webhooks_subscribed:
+          type: boolean
+        keywords:
+          type: string
+        leadgen_form_preview_details:
+          type: string
+        leadgen_has_crm_integration:
+          type: boolean
+        leadgen_has_fat_ping_crm_integration:
+          type: boolean
+        leadgen_tos_acceptance_time:
+          type: string
+        leadgen_tos_accepted:
+          type: boolean
+        leadgen_tos_accepting_user:
+          type: string
+        link:
+          type: string
+        location:
+          type: string
+        members:
+          type: string
+        merchant_id:
+          type: string
+        merchant_review_status:
+          type: string
+        messenger_ads_default_icebreakers:
+          type: string
+        messenger_ads_default_page_welcome_message:
+          type: string
+        messenger_ads_default_quick_replies:
+          type: string
+        mission:
+          type: string
+        mpg:
+          type: string
+        name:
+          type: string
+        name_with_location_descriptor:
+          type: string
+        network:
+          type: string
+        new_like_count:
+          type: number
+        offer_eligible:
+          type: boolean
+        overall_star_rating:
+          type: string
+        page_token:
+          type: string
+        parent_page:
+          type: object
+        parking:
+          type: string
+        payment_options:
+          type: string
+        personal_info:
+          type: string
+        personal_interests:
+          type: string
+        pharma_safety_info:
+          type: string
+        phone:
+          type: string
+        place_type:
+          type: string
+        plot_outline:
+          type: string
+        preferred_audience:
+          type: string
+        press_contact:
+          type: string
+        price_range:
+          type: string
+        produced_by:
+          type: string
+        products:
+          type: string
+        promotion_eligible:
+          type: boolean
+        promotion_ineligible_reason:
+          type: string
+        public_transic:
+          type: string
+        rating_count:
+          type: number
+        recipient:
+          type: string
+        record_label:
+          type: string
+        release_date:
+          type: string
+        restaurant_services:
+          type: string
+        restaurant_specialties:
+          type: string
+        schedule:
+          type: string
+        screenplay_by:
+          type: string
+        season:
+          type: string
+        single_line_address:
+          type: string
+        starring:
+          type: string
+        start_info:
+          type: string
+        store_code:
+          type: string
+        store_location_descriptor:
+          type: string
+        store_number:
+          type: string
+        studio:
+          type: string
+        supports_instant_articles:
+          type: boolean
+        talking_about_count:
+          type: number
+        temporary_status:
+          type: string
+        unread_message_count:
+          type: number
+        unread_notif_count:
+          type: number
+        unseen_message_count:
+          type: number
+        username:
+          type: string
+        verification_status:
+          type: string
+        voip_info:
+          type: string
+        website:
+          type: string
+        were_here_count:
+          type: number
+        written_by:
+          type: string
+      required:
+        - id
+        - about
+        - access_token
+        - ad_campaign
+        - affiliation
+        - app_id
+        - app_links
+        - artists_we_like
+        - attire
+        - awards
+        - band_interests
+        - best_page
+        - bio
+        - birthday
+        - booking_agent
+        - built
+        - business
+        - can_checkin
+        - can_post
+        - category
+        - category_list
+        - checkins
+        - company_overview
+        - connected_instagram_account
+        - contact_address
+        - context
+        - country_page_likes
+        - cover
+        - culinary_team
+        - current_location
+        - description
+        - description_html
+        - directed_by
+        - display_subtext
+        - displayed_message_response_time
+        - emails
+        - engagement
+        - fan_count
+        - featured_video
+        - features
+        - food_styles
+        - founded
+        - general_info
+        - general_manager
+        - genre
+        - global_brand_page_name
+        - global_brand_root_id
+        - has_added_app
+        - has_whatsapp_business_number
+        - has_whatsapp_number
+        - hometown
+        - hours
+        - impressum
+        - influences
+        - instagram_business_account
+        - instant_articles_review_status
+        - is_always_open
+        - is_chain
+        - is_community_page
+        - is_eligible_for_branded_content
+        - is_messenger_bot_get_started_enabled
+        - is_messenger_platform_bot
+        - is_owned
+        - is_permanently_closed
+        - is_published
+        - is_unclaimed
+        - is_verified
+        - is_webhooks_subscribed
+        - keywords
+        - leadgen_form_preview_details
+        - leadgen_has_crm_integration
+        - leadgen_has_fat_ping_crm_integration
+        - leadgen_tos_acceptance_time
+        - leadgen_tos_accepted
+        - leadgen_tos_accepting_user
+        - link
+        - location
+        - members
+        - merchant_id
+        - merchant_review_status
+        - messenger_ads_default_icebreakers
+        - messenger_ads_default_page_welcome_message
+        - messenger_ads_default_quick_replies
+        - mission
+        - mpg
+        - name
+        - name_with_location_descriptor
+        - network
+        - new_like_count
+        - offer_eligible
+        - overall_star_rating
+        - page_token
+        - parent_page
+        - parking
+        - payment_options
+        - personal_info
+        - personal_interests
+        - pharma_safety_info
+        - phone
+        - place_type
+        - plot_outline
+        - preferred_audience
+        - press_contact
+        - price_range
+        - produced_by
+        - products
+        - promotion_eligible
+        - promotion_ineligible_reason
+        - public_transic
+        - rating_count
+        - recipient
+        - record_label
+        - release_date
+        - restaurant_services
+        - restaurant_specialties
+        - schedule
+        - screenplay_by
+        - season
+        - single_line_address
+        - starring
+        - start_info
+        - store_code
+        - store_location_descriptor
+        - store_number
+        - studio
+        - supports_instant_articles
+        - talking_about_count
+        - temporary_status
+        - unread_message_count
+        - unread_notif_count
+        - unseen_message_count
+        - username
+        - verification_status
+        - voip_info
+        - website
+        - were_here_count
+        - written_by
+    FacebookAlbum:
+      type: object
+      properties:
+        id:
+          type: string
+        backdated_time:
+          type: string
+        backdated_time_granularity:
+          type: string
+        can_backdate:
+          type: boolean
+        can_upload:
+          type: boolean
+        count:
+          type: number
+        cover_photo:
+          type: object
+        created_time:
+          type: string
+        description:
+          type: string
+        edit_link:
+          type: string
+        event:
+          $ref: '#/components/schemas/FacebookEvent'
+        from:
+          $ref: '#/components/schemas/FacebookProfile'
+        is_user_facing:
+          type: boolean
+        link:
+          type: string
+        location:
+          type: string
+        modified_major:
+          type: string
+        name:
+          type: string
+        photo_count:
+          type: number
+        place:
+          $ref: '#/components/schemas/FacebookPlace'
+        privacy:
+          type: string
+        type:
+          type: string
+        updated_time:
+          type: string
+      required:
+        - id
+        - backdated_time
+        - backdated_time_granularity
+        - can_backdate
+        - can_upload
+        - count
+        - cover_photo
+        - created_time
+        - description
+        - edit_link
+        - event
+        - from
+        - is_user_facing
+        - link
+        - location
+        - modified_major
+        - name
+        - photo_count
+        - place
+        - privacy
+        - type
+        - updated_time
+    FacebookPlatformImageSource:
+      type: object
+      properties:
+        height:
+          type: number
+        source:
+          type: string
+        width:
+          type: number
+      required:
+        - height
+        - source
+        - width
+    FacebookNameTag:
+      type: object
+      properties:
+        id:
+          type: string
+        length:
+          type: number
+        name:
+          type: string
+        object:
+          $ref: '#/components/schemas/FacebookProfile'
+        offset:
+          type: number
+        type:
+          type: string
+      required:
+        - id
+        - length
+        - name
+        - object
+        - offset
+        - type
+    FacebookPhoto:
+      type: object
+      properties:
+        id:
+          type: string
+        album:
+          $ref: '#/components/schemas/FacebookAlbum'
+        alt_text:
+          type: string
+        alt_text_custom:
+          type: string
+        backdated_time:
+          type: string
+        backdated_time_granularity:
+          type: string
+        can_backdate:
+          type: boolean
+        can_delete:
+          type: boolean
+        can_tag:
+          type: boolean
+        created_time:
+          type: string
+        event:
+          $ref: '#/components/schemas/FacebookEvent'
+        from:
+          $ref: '#/components/schemas/FacebookProfile'
+        height:
+          type: number
+        icon:
+          type: string
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookPlatformImageSource'
+        link:
+          type: string
+        name:
+          type: string
+        name_tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookNameTag'
+        page_story_id:
+          type: string
+        picture:
+          type: string
+        place:
+          $ref: '#/components/schemas/FacebookPlace'
+        position:
+          type: number
+        source:
+          type: string
+        target:
+          $ref: '#/components/schemas/FacebookProfile'
+        updated_time:
+          type: string
+        webp_images:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacebookPlatformImageSource'
+        width:
+          type: number
+      required:
+        - id
+        - album
+        - alt_text
+        - alt_text_custom
+        - backdated_time
+        - backdated_time_granularity
+        - can_backdate
+        - can_delete
+        - can_tag
+        - created_time
+        - event
+        - from
+        - height
+        - icon
+        - images
+        - link
+        - name
+        - name_tags
+        - page_story_id
+        - picture
+        - place
+        - position
+        - source
+        - target
+        - updated_time
+        - webp_images
+        - width
+    Nft:
+      type: object
+      properties:
+        contract:
+          type: object
+          properties:
+            address:
+              type: string
+        rawMetadata:
+          type: object
+          properties:
+            attributes:
+              type: array
+              items:
+                type: object
+        tokenId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        balance:
+          type: number
+      required:
+        - contract
+        - rawMetadata
+        - tokenId
+        - title
+        - description
+        - balance
+    ethereumNfts:
+      type: object
+      properties:
+        ownedNfts:
+          $ref: '#/components/schemas/Nft'
+        totalCount:
+          type: number
+      required:
+        - ownedNfts
+        - totalCount
+    polygonNfts:
+      type: object
+      properties:
+        ownedNfts:
+          $ref: '#/components/schemas/Nft'
+        totalCount:
+          type: number
+      required:
+        - ownedNfts
+        - totalCount
+    LinkedinProfile:
+      type: object
+      properties:
+        profilePicture:
+          type: object
+          properties:
+            displayImage:
+              type: string
+        localizedLastName:
+          type: string
+        id:
+          type: string
+        localizedFirstName:
+          type: string
+        email:
+          type: string
+      required:
+        - localizedLastName
+        - id
+        - localizedFirstName
+        - email
+    SpotifyProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        country:
+          type: string
+        uri:
+          type: string
+        display_name:
+          type: string
+        followers:
+          type: object
+        email:
+          type: string
+        explicit_content:
+          type: object
+        href:
+          type: string
+        external_urls:
+          type: object
+        images:
+          type: object
+        product:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - country
+        - uri
+        - display_name
+        - followers
+        - email
+        - explicit_content
+        - href
+        - external_urls
+        - images
+        - product
+        - type
+    SpotifyPlaylist:
+      type: object
+      properties:
+        collaborative:
+          type: boolean
+        description:
+          type: string
+        external_urls:
+          type: object
+        href:
+          type: string
+        id:
+          type: string
+        images:
+          type: object
+        name:
+          type: string
+        owner:
+          type: object
+        public:
+          type: boolean
+        snapshot_id:
+          type: string
+        tracks:
+          type: object
+        type:
+          type: string
+        uri:
+          type: string
+      required:
+        - collaborative
+        - description
+        - external_urls
+        - href
+        - id
+        - images
+        - name
+        - owner
+        - public
+        - snapshot_id
+        - tracks
+        - type
+        - uri
+    GithubProfile:
+      type: object
+      properties:
+        login:
+          type: string
+        id:
+          type: string
+        node_id:
+          type: string
+        avatar_url:
+          type: string
+        gravatar_id:
+          type: string
+        url:
+          type: string
+        html_url:
+          type: string
+        followers_url:
+          type: string
+        following_url:
+          type: string
+        gists_url:
+          type: string
+        starred_url:
+          type: string
+        subscriptions_url:
+          type: string
+        organizations_url:
+          type: string
+        repos_url:
+          type: string
+        events_url:
+          type: string
+        received_events_url:
+          type: string
+        type:
+          type: string
+        site_admin:
+          type: boolean
+        name:
+          type: string
+        company:
+          type: string
+        blog:
+          type: string
+        location:
+          type: string
+        email:
+          type: string
+        hireable:
+          type: string
+        bio:
+          type: string
+        twitter_username:
+          type: string
+        public_repos:
+          type: number
+        public_gists:
+          type: number
+        followers:
+          type: number
+        following:
+          type: number
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        private_gists:
+          type: number
+        total_private_repos:
+          type: number
+        owned_private_repos:
+          type: number
+        disk_usage:
+          type: number
+        collaborators:
+          type: number
+        two_factor_authentication:
+          type: boolean
+      required:
+        - login
+        - id
+        - node_id
+        - avatar_url
+        - gravatar_id
+        - url
+        - html_url
+        - followers_url
+        - following_url
+        - gists_url
+        - starred_url
+        - subscriptions_url
+        - organizations_url
+        - repos_url
+        - events_url
+        - received_events_url
+        - type
+        - site_admin
+        - name
+        - company
+        - blog
+        - location
+        - email
+        - hireable
+        - bio
+        - twitter_username
+        - public_repos
+        - public_gists
+        - followers
+        - following
+        - created_at
+        - updated_at
+        - private_gists
+        - total_private_repos
+        - owned_private_repos
+        - disk_usage
+        - collaborators
+        - two_factor_authentication
+    GithubPermissions:
+      type: object
+      properties:
+        admin:
+          type: boolean
+        maintain:
+          type: boolean
+        push:
+          type: boolean
+        triage:
+          type: boolean
+        pull:
+          type: boolean
+      required:
+        - admin
+        - maintain
+        - push
+        - triage
+        - pull
+    GithubRepository:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        name:
+          type: string
+        full_name:
+          type: string
+        private:
+          type: boolean
+        owner:
+          $ref: '#/components/schemas/GithubProfile'
+        html_url:
+          type: string
+        description:
+          type: string
+        fork:
+          type: boolean
+        url:
+          type: string
+        forks_url:
+          type: string
+        keys_url:
+          type: string
+        collaborators_url:
+          type: string
+        teams_url:
+          type: string
+        hooks_url:
+          type: string
+        issue_events_url:
+          type: string
+        events_url:
+          type: string
+        assignees_url:
+          type: string
+        branches_url:
+          type: string
+        tags_url:
+          type: string
+        blobs_url:
+          type: string
+        git_tags_url:
+          type: string
+        git_refs_url:
+          type: string
+        trees_url:
+          type: string
+        statuses_url:
+          type: string
+        languages_url:
+          type: string
+        stargazers_url:
+          type: string
+        contributors_url:
+          type: string
+        subscribers_url:
+          type: string
+        subscription_url:
+          type: string
+        commits_url:
+          type: string
+        git_commits_url:
+          type: string
+        comments_url:
+          type: string
+        issue_comment_url:
+          type: string
+        contents_url:
+          type: string
+        compare_url:
+          type: string
+        merges_url:
+          type: string
+        archive_url:
+          type: string
+        downloads_url:
+          type: string
+        issues_url:
+          type: string
+        pulls_url:
+          type: string
+        milestones_url:
+          type: string
+        notifications_url:
+          type: string
+        labels_url:
+          type: string
+        releases_url:
+          type: string
+        deployments_url:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        pushed_at:
+          format: date-time
+          type: string
+        git_url:
+          type: string
+        ssh_url:
+          type: string
+        clone_url:
+          type: string
+        svn_url:
+          type: string
+        homepage:
+          type: string
+        size:
+          type: number
+        stargazers_count:
+          type: number
+        watchers_count:
+          type: number
+        language:
+          type: string
+        has_issues:
+          type: boolean
+        has_projects:
+          type: boolean
+        has_downloads:
+          type: boolean
+        has_wiki:
+          type: boolean
+        has_pages:
+          type: boolean
+        forks_count:
+          type: number
+        mirror_url:
+          type: string
+        archived:
+          type: boolean
+        disabled:
+          type: boolean
+        open_issues_count:
+          type: number
+        license:
+          type: string
+        allow_forking:
+          type: boolean
+        is_template:
+          type: boolean
+        web_commit_signoff_required:
+          type: boolean
+        topics:
+          type: array
+          items:
+            type: string
+        visibility:
+          type: string
+        default_branch:
+          type: string
+        permissions:
+          $ref: '#/components/schemas/GithubPermissions'
+      required:
+        - id
+        - node_id
+        - name
+        - full_name
+        - private
+        - owner
+        - html_url
+        - description
+        - fork
+        - url
+        - forks_url
+        - keys_url
+        - collaborators_url
+        - teams_url
+        - hooks_url
+        - issue_events_url
+        - events_url
+        - assignees_url
+        - branches_url
+        - tags_url
+        - blobs_url
+        - git_tags_url
+        - git_refs_url
+        - trees_url
+        - statuses_url
+        - languages_url
+        - stargazers_url
+        - contributors_url
+        - subscribers_url
+        - subscription_url
+        - commits_url
+        - git_commits_url
+        - comments_url
+        - issue_comment_url
+        - contents_url
+        - compare_url
+        - merges_url
+        - archive_url
+        - downloads_url
+        - issues_url
+        - pulls_url
+        - milestones_url
+        - notifications_url
+        - labels_url
+        - releases_url
+        - deployments_url
+        - created_at
+        - updated_at
+        - pushed_at
+        - git_url
+        - ssh_url
+        - clone_url
+        - svn_url
+        - homepage
+        - size
+        - stargazers_count
+        - watchers_count
+        - language
+        - has_issues
+        - has_projects
+        - has_downloads
+        - has_wiki
+        - has_pages
+        - forks_count
+        - mirror_url
+        - archived
+        - disabled
+        - open_issues_count
+        - license
+        - allow_forking
+        - is_template
+        - web_commit_signoff_required
+        - topics
+        - visibility
+        - default_branch
+        - permissions
+    DiscordProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        avatar:
+          type: string
+        avatar_decoration:
+          type: string
+        discriminator:
+          type: string
+        public_flags:
+          type: number
+        flags:
+          type: number
+        banner:
+          type: string
+        banner_color:
+          type: string
+        accent_color:
+          type: string
+        locale:
+          type: string
+        mfa_enabled:
+          type: boolean
+        premium_type:
+          type: number
+      required:
+        - id
+        - username
+        - avatar
+        - avatar_decoration
+        - discriminator
+        - public_flags
+        - flags
+        - banner
+        - banner_color
+        - accent_color
+        - locale
+        - mfa_enabled
+        - premium_type
+    StackoverflowProfile:
+      type: object
+      properties:
+        badge_counts:
+          type: object
+        view_count:
+          type: number
+        down_vote_count:
+          type: number
+        up_vote_count:
+          type: number
+        answer_count:
+          type: number
+        question_count:
+          type: number
+        account_id:
+          type: number
+        is_employee:
+          type: boolean
+        last_modified_date:
+          type: number
+        last_access_date:
+          type: number
+        reputation_change_year:
+          type: number
+        reputation_change_quarter:
+          type: number
+        reputation_change_month:
+          type: number
+        reputation_change_week:
+          type: number
+        reputation_change_day:
+          type: number
+        reputation:
+          type: number
+        creation_date:
+          type: number
+        user_type:
+          type: string
+        user_id:
+          type: number
+        accept_rate:
+          type: number
+        about_me:
+          type: string
+        location:
+          type: string
+        website_url:
+          type: string
+        link:
+          type: string
+        profile_image:
+          type: string
+        display_name:
+          type: string
+      required:
+        - badge_counts
+        - view_count
+        - down_vote_count
+        - up_vote_count
+        - answer_count
+        - question_count
+        - account_id
+        - is_employee
+        - last_modified_date
+        - last_access_date
+        - reputation_change_year
+        - reputation_change_quarter
+        - reputation_change_month
+        - reputation_change_week
+        - reputation_change_day
+        - reputation
+        - creation_date
+        - user_type
+        - user_id
+        - accept_rate
+        - about_me
+        - location
+        - website_url
+        - link
+        - profile_image
+        - display_name
+    StackoverflowOwner:
+      type: object
+      properties:
+        reputation:
+          type: number
+        user_id:
+          type: number
+        user_type:
+          type: string
+        profile_image:
+          type: string
+        display_name:
+          type: string
+        link:
+          type: string
+      required:
+        - reputation
+        - user_id
+        - user_type
+        - profile_image
+        - display_name
+        - link
+    StackoverflowPost:
+      type: object
+      properties:
+        owner:
+          $ref: '#/components/schemas/StackoverflowOwner'
+        score:
+          type: number
+        last_edit_date:
+          type: number
+        last_activity_date:
+          type: number
+        creation_date:
+          type: number
+        post_type:
+          type: string
+        post_id:
+          type: number
+        content_license:
+          type: string
+        link:
+          type: string
+      required:
+        - owner
+        - score
+        - last_edit_date
+        - last_activity_date
+        - creation_date
+        - post_type
+        - post_id
+        - content_license
+        - link
+    VenmoUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        is_active:
+          type: boolean
+        is_payable:
+          type: boolean
+        profile_picture_url:
+          type: string
+        about:
+          type: string
+        display_name:
+          type: string
+        is_venmo_team:
+          type: string
+        username:
+          type: string
+        is_blocked:
+          type: boolean
+        date_joined:
+          type: string
+        is_group:
+          type: boolean
+        email:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        friend_status:
+          type: object
+        identity_type:
+          type: string
+        friends_count:
+          type: number
+        identity:
+          type: object
+        audience:
+          type: string
+        trust_request:
+          type: object
+      required:
+        - first_name
+        - last_name
+        - is_active
+        - is_payable
+        - profile_picture_url
+        - about
+        - display_name
+        - is_venmo_team
+        - username
+        - is_blocked
+        - date_joined
+        - is_group
+        - email
+        - id
+        - phone
+        - friend_status
+        - identity_type
+        - friends_count
+        - identity
+        - audience
+        - trust_request
+    VenmoOutgoing:
+      type: object
+      properties:
+        outgoing_requests_count:
+          type: number
+        outgoing_payments_count:
+          type: number
+      required:
+        - outgoing_requests_count
+        - outgoing_payments_count
+    VenmoNotifications:
+      type: object
+      properties:
+        incoming_count:
+          type: number
+        outgoing_count:
+          $ref: '#/components/schemas/VenmoOutgoing'
+      required:
+        - incoming_count
+        - outgoing_count
+    VenmoProfile:
+      type: object
+      properties:
+        accountId:
+          type: string
+        testing_bucket_id:
+          type: string
+        feature_groups:
+          type: array
+          items:
+            type: string
+        zendesk_identifier:
+          type: string
+        is_indebted:
+          type: boolean
+        recovery_status:
+          type: string
+        is_suspended_for_disputes:
+          type: boolean
+        is_limited_account:
+          type: boolean
+        cip_status:
+          type: string
+        is_balance_upgrade_user:
+          type: boolean
+        needs_verification:
+          type: string
+        is_goods_services_limited:
+          type: boolean
+        automatic_transfer_enabled:
+          type: boolean
+        is_eligible_for_business_profile_creation:
+          type: boolean
+        relationships:
+          type: object
+        qrc_rewards_enabled:
+          type: object
+        user:
+          $ref: '#/components/schemas/VenmoUser'
+        is_recovery_exempted:
+          type: boolean
+        phone_needs_verification:
+          type: boolean
+        date_updater_prompted:
+          type: string
+        use_new_default_funding_source_logic:
+          type: boolean
+        capabilities:
+          type: object
+        is_web_whitelisted:
+          type: boolean
+        available_instant_transfer_capabilities:
+          type: array
+          items:
+            type: string
+        balance:
+          type: string
+        notifications:
+          $ref: '#/components/schemas/VenmoNotifications'
+      required:
+        - accountId
+        - testing_bucket_id
+        - feature_groups
+        - zendesk_identifier
+        - is_indebted
+        - recovery_status
+        - is_suspended_for_disputes
+        - is_limited_account
+        - cip_status
+        - is_balance_upgrade_user
+        - needs_verification
+        - is_goods_services_limited
+        - automatic_transfer_enabled
+        - is_eligible_for_business_profile_creation
+        - relationships
+        - qrc_rewards_enabled
+        - user
+        - is_recovery_exempted
+        - phone_needs_verification
+        - date_updater_prompted
+        - use_new_default_funding_source_logic
+        - capabilities
+        - is_web_whitelisted
+        - available_instant_transfer_capabilities
+        - balance
+        - notifications
+    VenmoFriend:
+      type: object
+      properties:
+        identity:
+          type: object
+        friend_status:
+          type: string
+        audience:
+          type: string
+        is_blocked:
+          type: boolean
+        identity_type:
+          type: string
+        id:
+          type: string
+        phone:
+          type: string
+        is_active:
+          type: boolean
+        display_name:
+          type: string
+        last_name:
+          type: string
+        friends_count:
+          type: object
+        username:
+          type: string
+        about:
+          type: string
+        first_name:
+          type: string
+        trust_request:
+          type: object
+        profile_picture_url:
+          type: string
+        date_joined:
+          type: string
+        is_group:
+          type: boolean
+        email:
+          type: string
+        is_payable:
+          type: boolean
+      required:
+        - identity
+        - friend_status
+        - audience
+        - is_blocked
+        - identity_type
+        - id
+        - phone
+        - is_active
+        - display_name
+        - last_name
+        - friends_count
+        - username
+        - about
+        - first_name
+        - trust_request
+        - profile_picture_url
+        - date_joined
+        - is_group
+        - email
+        - is_payable
+    VenmoFriends:
+      type: object
+      properties:
+        accountId:
+          type: string
+        friends:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenmoFriend'
+      required:
+        - accountId
+        - friends
+    VenmoPeer:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        image_url:
+          type: string
+        display_name:
+          type: string
+        username:
+          type: string
+      required:
+        - type
+        - id
+        - image_url
+        - display_name
+        - username
+    VenmoTransaction:
+      type: object
+      properties:
+        datetime_modified:
+          type: string
+        peer:
+          $ref: '#/components/schemas/VenmoPeer'
+        is_transaction_supported_for_dispute_intake:
+          type: boolean
+        ledger_id:
+          type: string
+        amount_in_cents:
+          type: number
+        memo:
+          type: string
+        running_balance_in_cents:
+          type: number
+        transaction_type:
+          type: string
+        funding_method_type:
+          type: string
+        status:
+          type: string
+        datetime_created:
+          type: string
+        audience:
+          type: string
+        movement_type:
+          type: string
+      required:
+        - datetime_modified
+        - peer
+        - is_transaction_supported_for_dispute_intake
+        - ledger_id
+        - amount_in_cents
+        - memo
+        - running_balance_in_cents
+        - transaction_type
+        - funding_method_type
+        - status
+        - datetime_created
+        - audience
+        - movement_type
+    VenmoTransactions:
+      type: object
+      properties:
+        accountId:
+          type: string
+        exists_out_of_range_transactions:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/VenmoTransaction'
+      required:
+        - accountId
+        - exists_out_of_range_transactions
+        - transactions
+    PreferredPricingCurrency:
+      type: object
+      properties:
+        name:
+          type: string
+        isoCode:
+          type: string
+        flagSymbol:
+          type: string
+      required:
+        - name
+        - isoCode
+        - flagSymbol
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        primary:
+          type: boolean
+        automatable:
+          type: boolean
+        email:
+          type: string
+      required:
+        - id
+        - primary
+        - email
+    ShopifyProfile:
+      type: object
+      properties:
+        userId:
+          type: string
+        preferredPricingCurrency:
+          $ref: '#/components/schemas/PreferredPricingCurrency'
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+      required:
+        - userId
+        - preferredPricingCurrency
+        - accounts
+    ShopifyAccountExternal:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        primary:
+          type: boolean
+        __typename:
+          type: string
+        username:
+          type: string
+        automatable:
+          type: boolean
+        authenticated:
+          type: boolean
+        reauthRecommended:
+          type: boolean
+      required:
+        - id
+        - email
+        - primary
+        - __typename
+    ShopifyAccountsExternal:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShopifyAccountExternal'
+        currentUser:
+          $ref: '#/components/schemas/User'
+      required:
+        - accounts
+        - currentUser
+    Item:
+      type: object
+      properties:
+        status:
+          type: string
+        quantity:
+          type: number
+        quantityAvailable:
+          type: number
+        addedByUser:
+          type: boolean
+        image:
+          type: string
+        productId:
+          type: string
+        variantId:
+          type: string
+        variantTitle:
+          type: string
+        productTitle:
+          type: string
+        unitPrice:
+          type: string
+        currencyCode:
+          type: string
+        compareAtPrice:
+          type: boolean
+        discountedAmount:
+          type: string
+      required:
+        - status
+        - quantity
+        - quantityAvailable
+        - addedByUser
+        - image
+        - productId
+        - variantId
+        - variantTitle
+        - productTitle
+        - unitPrice
+        - currencyCode
+    Shop:
+      type: object
+      properties:
+        id:
+          type: string
+        shopifyId:
+          type: string
+        name:
+          type: string
+        followedByUser:
+          type: boolean
+        websiteUrl:
+          type: string
+        shareUrl:
+          type: string
+        shopNetwork:
+          type: boolean
+        nativeProductPagesEnabled:
+          type: boolean
+        storeEligible:
+          type: boolean
+        description:
+          type: string
+        logo:
+          type: string
+      required:
+        - id
+        - shopifyId
+        - name
+        - followedByUser
+        - websiteUrl
+        - shareUrl
+        - shopNetwork
+        - nativeProductPagesEnabled
+        - storeEligible
+        - description
+        - logo
+    SubtotalPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+        currencyCode:
+          type: string
+      required:
+        - amount
+        - currencyCode
+    ShopCart:
+      type: object
+      properties:
+        id:
+          type: string
+        lineItemCount:
+          type: number
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        shop:
+          $ref: '#/components/schemas/Shop'
+        subtotalPrice:
+          $ref: '#/components/schemas/SubtotalPrice'
+      required:
+        - id
+        - lineItemCount
+        - lineItems
+        - shop
+        - subtotalPrice
+    PageInfo:
+      type: object
+      properties:
+        hasNextPage:
+          type: boolean
+        endCursor:
+          type: string
+      required:
+        - hasNextPage
+        - endCursor
+    ShopifyCart:
+      type: object
+      properties:
+        shopCarts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShopCart'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+        - shopCarts
+        - pageInfo
+    ShopifyFollowedShops:
+      type: object
+      properties: {}
+    Price:
+      type: object
+      properties:
+        amount:
+          type: string
+        currencyCode:
+          type: string
+      required:
+        - amount
+        - currencyCode
+    ReviewAnalytics:
+      type: object
+      properties:
+        averageRating:
+          type: number
+        count:
+          type: number
+      required:
+        - averageRating
+        - count
+    Favorite:
+      type: object
+      properties:
+        favoriteId:
+          type: string
+        productId:
+          type: string
+        title:
+          type: string
+        inDefaultProductList:
+          type: boolean
+        isProductDiscoveryEligible:
+          type: boolean
+        variantId:
+          type: string
+        price:
+          $ref: '#/components/schemas/Price'
+        url:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        reviewAnalytics:
+          $ref: '#/components/schemas/ReviewAnalytics'
+        shop:
+          $ref: '#/components/schemas/Shop'
+      required:
+        - favoriteId
+        - productId
+        - title
+        - inDefaultProductList
+        - isProductDiscoveryEligible
+        - variantId
+        - price
+        - url
+        - images
+        - reviewAnalytics
+        - shop
+    ShopifyFavorites:
+      type: object
+      properties:
+        id:
+          type: string
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Favorite'
+      required:
+        - id
+        - pageInfo
+        - favorites
+    EtaInfo:
+      type: object
+      properties:
+        formattedEta:
+          type: string
+        formattedEtaTime:
+          type: string
+        isFuture:
+          type: boolean
+      required:
+        - formattedEta
+        - isFuture
+    TotalPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+        currencyCode:
+          type: string
+      required:
+        - amount
+        - currencyCode
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        image:
+          type: string
+        productTitle:
+          type: string
+        totalPrice:
+          $ref: '#/components/schemas/TotalPrice'
+      required:
+        - id
+        - image
+        - productTitle
+        - totalPrice
+    StringDecoder:
+      type: object
+      properties: {}
+    CarrierInfo:
+      type: object
+      properties:
+        id:
+          type: string
+        imageUrl:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - imageUrl
+        - name
+    Tracker:
+      type: object
+      properties:
+        id:
+          type: string
+        active:
+          type: boolean
+        status:
+          type: string
+        estimatedDeliveryDate:
+          $ref: '#/components/schemas/StringDecoder'
+        image:
+          type: string
+        carrierInfo:
+          $ref: '#/components/schemas/CarrierInfo'
+      required:
+        - id
+        - active
+        - status
+        - estimatedDeliveryDate
+        - image
+        - carrierInfo
+    OrderPayment:
+      type: object
+      properties:
+        id:
+          type: string
+        paymentMethod:
+          type: string
+      required:
+        - id
+        - paymentMethod
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderNumber:
+          type: string
+        loading:
+          type: boolean
+        isShopifyOrder:
+          type: boolean
+        shippingMethod:
+          type: string
+        canBuyAgain:
+          type: boolean
+        displayAsPastOrder:
+          type: boolean
+        displayStatus:
+          type: string
+        deliveryStatus:
+          type: string
+        deliveryType:
+          type: string
+        markedAsDelivered:
+          type: boolean
+        markedAsDeliveredAt:
+          type: string
+        canUndoMarkAsDelivered:
+          type: boolean
+        archived:
+          type: boolean
+        createdAt:
+          type: string
+        etaInfo:
+          $ref: '#/components/schemas/EtaInfo'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        trackers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tracker'
+        shop:
+          $ref: '#/components/schemas/Shop'
+        orderPayments:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderPayment'
+      required:
+        - orderId
+        - orderNumber
+        - loading
+        - isShopifyOrder
+        - canBuyAgain
+        - displayAsPastOrder
+        - displayStatus
+        - deliveryStatus
+        - deliveryType
+        - markedAsDelivered
+        - canUndoMarkAsDelivered
+        - archived
+        - createdAt
+        - products
+        - shop
+    ShopifyOrders:
+      type: object
+      properties:
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+      required:
+        - pageInfo
+        - orders
+    Alias:
+      type: object
+      properties:
+        type:
+          type: string
+        canonical_text:
+          type: string
+        verified:
+          type: boolean
+        version:
+          type: number
+        display_date:
+          type: number
+      required:
+        - type
+        - canonical_text
+        - verified
+        - version
+        - display_date
+    NotificationPreference:
+      type: object
+      properties:
+        type:
+          type: string
+        canonical_text:
+          type: string
+        enabled:
+          type: boolean
+      required:
+        - type
+        - canonical_text
+        - enabled
+    CashappProfile:
+      type: object
+      properties:
+        aliases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alias'
+        notification_preferences:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationPreference'
+        full_name:
+          type: string
+        customer_token:
+          type: string
+        require_passcode_confirmation:
+          type: boolean
+        has_passcode:
+          type: boolean
+        sca_required:
+          type: boolean
+        cashtag:
+          type: string
+        cashtag_with_currency_symbol:
+          type: string
+        cashtag_url:
+          type: string
+        cashtag_url_display_text:
+          type: string
+        cashtag_url_enabled:
+          type: boolean
+        cashtag_qr_image_url:
+          type: string
+        cashtag_qr_svg_url:
+          type: string
+        printable_cashtag_qr_image_url:
+          type: string
+        rate_plan:
+          type: string
+        can_upgrade_to_business:
+          type: boolean
+        is_verified_account:
+          type: boolean
+        app_message_notifications_enabled:
+          type: boolean
+        instruments:
+          type: array
+          items:
+            type: object
+        deposit_preference:
+          type: string
+        bitcoin_deposit_enabled:
+          type: boolean
+        bitcoin_withdrawal_enabled:
+          type: boolean
+        enable_cryptocurrency_transfer_out_status:
+          type: string
+        enable_cryptocurrency_transfer_in_status:
+          type: string
+        scheduled_reload_enabled:
+          type: boolean
+        check_deposits_enabled:
+          type: boolean
+        bitcoin_p2p_enabled:
+          type: boolean
+        customer_since:
+          type: number
+        issued_card:
+          type: object
+        has_passed_idv:
+          type: boolean
+        default_currency:
+          type: string
+        country_code:
+          type: string
+        direct_deposit_account:
+          type: object
+        incoming_request_policy:
+          type: string
+        available_p2p_currencies:
+          type: array
+          items:
+            type: string
+        available_p2p_target_regions:
+          type: array
+          items:
+            type: string
+        region:
+          type: string
+        direct_deposit_account_enabled:
+          type: boolean
+        bitcoin_display_units:
+          type: string
+        cash_out_options:
+          type: array
+          items:
+            type: object
+      required:
+        - aliases
+        - notification_preferences
+        - full_name
+        - customer_token
+        - require_passcode_confirmation
+        - has_passcode
+        - sca_required
+        - cashtag
+        - cashtag_with_currency_symbol
+        - cashtag_url
+        - cashtag_url_display_text
+        - cashtag_url_enabled
+        - cashtag_qr_image_url
+        - cashtag_qr_svg_url
+        - printable_cashtag_qr_image_url
+        - rate_plan
+        - can_upgrade_to_business
+        - is_verified_account
+        - app_message_notifications_enabled
+        - instruments
+        - deposit_preference
+        - bitcoin_deposit_enabled
+        - bitcoin_withdrawal_enabled
+        - enable_cryptocurrency_transfer_out_status
+        - enable_cryptocurrency_transfer_in_status
+        - scheduled_reload_enabled
+        - check_deposits_enabled
+        - bitcoin_p2p_enabled
+        - customer_since
+        - issued_card
+        - has_passed_idv
+        - default_currency
+        - country_code
+        - direct_deposit_account
+        - incoming_request_policy
+        - available_p2p_currencies
+        - available_p2p_target_regions
+        - region
+        - direct_deposit_account_enabled
+        - bitcoin_display_units
+        - cash_out_options
+    GmailProfile:
+      type: object
+      properties:
+        emailAddress:
+          type: string
+        messagesTotal:
+          type: number
+        threadsTotal:
+          type: number
+        historyId:
+          type: string
+      required:
+        - emailAddress
+        - messagesTotal
+        - threadsTotal
+        - historyId
+    GmailDrafts:
+      type: object
+      properties: {}
+    Header:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+        - name
+        - value
+    MessagePartBody:
+      type: object
+      properties:
+        attachmentId:
+          type: string
+        size:
+          type: number
+        data:
+          type: string
+      required:
+        - attachmentId
+        - size
+        - data
+    MessagePart:
+      type: object
+      properties:
+        partId:
+          type: string
+        mimeType:
+          type: string
+        filename:
+          type: string
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Header'
+        body:
+          $ref: '#/components/schemas/MessagePartBody'
+        parts:
+          type: array
+          items:
+            type: object
+      required:
+        - partId
+        - mimeType
+        - filename
+        - headers
+        - body
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        threadId:
+          type: string
+        labelIds:
+          type: array
+          items:
+            type: string
+        snippet:
+          type: string
+        historyId:
+          type: string
+        internalDate:
+          type: string
+        payload:
+          $ref: '#/components/schemas/MessagePart'
+        sizeEstimate:
+          type: number
+        raw:
+          type: string
+      required:
+        - id
+        - threadId
+        - labelIds
+        - snippet
+        - historyId
+        - internalDate
+        - payload
+        - sizeEstimate
+        - raw
+    GmailDraft:
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          $ref: '#/components/schemas/Message'
+      required:
+        - id
+        - message
+    Label:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        messageListVisibility:
+          type: string
+        labelListVisibility:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - name
+        - messageListVisibility
+        - labelListVisibility
+        - type
+    GmailLabels:
+      type: object
+      properties:
+        resultSizeEstimate:
+          type: number
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Label'
+      required:
+        - resultSizeEstimate
+        - labels
+    Color:
+      type: object
+      properties:
+        textColor:
+          type: string
+        backgroundColor:
+          type: string
+      required:
+        - textColor
+        - backgroundColor
+    GmailLabel:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        messageListVisibility:
+          type: string
+        labelListVisibility:
+          type: string
+        type:
+          type: string
+        messagesTotal:
+          type: number
+        messagesUnread:
+          type: number
+        threadsTotal:
+          type: number
+        threadsUnread:
+          type: number
+        color:
+          $ref: '#/components/schemas/Color'
+      required:
+        - id
+        - name
+        - messageListVisibility
+        - labelListVisibility
+        - type
+        - messagesTotal
+        - messagesUnread
+        - threadsTotal
+        - threadsUnread
+        - color
+    GmailMessages:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        nextPageToken:
+          type: string
+        resultSizeEstimate:
+          type: number
+      required:
+        - messages
+        - nextPageToken
+        - resultSizeEstimate
+    GmailMessage:
+      type: object
+      properties:
+        id:
+          type: string
+        threadId:
+          type: string
+        labelIds:
+          type: array
+          items:
+            type: string
+        snippet:
+          type: string
+        historyId:
+          type: string
+        internalDate:
+          type: string
+        paylaod:
+          $ref: '#/components/schemas/MessagePart'
+        sizeEstimate:
+          type: number
+      required:
+        - id
+        - threadId
+        - labelIds
+        - snippet
+        - historyId
+        - internalDate
+        - paylaod
+        - sizeEstimate
+    Thread:
+      type: object
+      properties:
+        id:
+          type: string
+        snippet:
+          type: string
+        historyId:
+          type: string
+      required:
+        - id
+        - snippet
+        - historyId
+    GmailThreads:
+      type: object
+      properties:
+        threads:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thread'
+        nextPageToken:
+          type: string
+        resultSizeEstimate:
+          type: number
+      required:
+        - threads
+        - nextPageToken
+        - resultSizeEstimate
+    GmailThread:
+      type: object
+      properties:
+        id:
+          type: string
+        snippet:
+          type: string
+        historyId:
+          type: string
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/GmailMessage'
+      required:
+        - id
+        - snippet
+        - historyId
+        - messages
+    DefaultReminders:
+      type: object
+      properties:
+        method:
+          type: string
+        minutes:
+          type: number
+      required:
+        - method
+        - minutes
+    Notification:
+      type: object
+      properties:
+        type:
+          type: string
+        method:
+          type: string
+      required:
+        - type
+        - method
+    NotificationSettings:
+      type: object
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+      required:
+        - notifications
+    ConferenceProperties:
+      type: object
+      properties:
+        allowedConferenceSolutionTypes:
+          type: array
+          items:
+            type: string
+      required:
+        - allowedConferenceSolutionTypes
+    Calendar:
+      type: object
+      properties:
+        kind:
+          type: string
+        etag:
+          type: string
+        id:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        timeZone:
+          type: string
+        summaryOverride:
+          type: string
+        colorId:
+          type: string
+        backgroundColor:
+          type: string
+        foregroundColor:
+          type: string
+        hidden:
+          type: boolean
+        selected:
+          type: boolean
+        accessRole:
+          type: string
+        defaultReminders:
+          $ref: '#/components/schemas/DefaultReminders'
+        notificationSettings:
+          $ref: '#/components/schemas/NotificationSettings'
+        primary:
+          type: boolean
+        deleted:
+          type: boolean
+        conferenceProperties:
+          $ref: '#/components/schemas/ConferenceProperties'
+      required:
+        - kind
+        - etag
+        - id
+        - summary
+        - description
+        - location
+        - timeZone
+        - summaryOverride
+        - colorId
+        - backgroundColor
+        - foregroundColor
+        - hidden
+        - selected
+        - accessRole
+        - defaultReminders
+        - notificationSettings
+        - primary
+        - deleted
+        - conferenceProperties
+    GcalendarCalendarList:
+      type: object
+      properties:
+        kind:
+          type: string
+        etag:
+          type: string
+        nextPageToken:
+          type: string
+        nextSyncToken:
+          type: string
+        calendars:
+          type: array
+          items:
+            $ref: '#/components/schemas/Calendar'
+        resultSizeEstimate:
+          type: number
+      required:
+        - kind
+        - etag
+        - nextPageToken
+        - nextSyncToken
+        - calendars
+        - resultSizeEstimate
+    ConferenceProperty:
+      type: object
+      properties:
+        allowedConferenceSolutionTypes:
+          type: array
+          items:
+            type: string
+      required:
+        - allowedConferenceSolutionTypes
+    GcalendarCalendar:
+      type: object
+      properties:
+        kind:
+          type: string
+        etag:
+          type: string
+        id:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        timeZone:
+          type: string
+        conferenceProperties:
+          $ref: '#/components/schemas/ConferenceProperty'
+      required:
+        - kind
+        - etag
+        - id
+        - summary
+        - description
+        - location
+        - timeZone
+        - conferenceProperties
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        displayName:
+          type: string
+        self:
+          type: boolean
+      required:
+        - id
+        - email
+        - displayName
+        - self
+    Time:
+      type: object
+      properties:
+        date:
+          format: date-time
+          type: string
+        dateTime:
+          format: date-time
+          type: string
+        timeZone:
+          type: string
+      required:
+        - date
+        - dateTime
+        - timeZone
+    Attendee:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        displayName:
+          type: string
+        organizer:
+          type: boolean
+        self:
+          type: boolean
+        resource:
+          type: boolean
+        optional:
+          type: boolean
+        responseStatus:
+          type: string
+        comment:
+          type: string
+        additionalGuests:
+          type: number
+      required:
+        - id
+        - email
+        - displayName
+        - organizer
+        - self
+        - resource
+        - optional
+        - responseStatus
+        - comment
+        - additionalGuests
+    ExtendedProperties:
+      type: object
+      properties:
+        private:
+          type: object
+        shared:
+          type: object
+      required:
+        - private
+        - shared
+    ConferenceSolutionKey:
+      type: object
+      properties:
+        type:
+          type: string
+      required:
+        - type
+    Status:
+      type: object
+      properties:
+        statusCode:
+          type: string
+      required:
+        - statusCode
+    CreateRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+        conferenceSolutionKey:
+          $ref: '#/components/schemas/ConferenceSolutionKey'
+        status:
+          $ref: '#/components/schemas/Status'
+      required:
+        - requestId
+        - conferenceSolutionKey
+        - status
+    EntryPoint:
+      type: object
+      properties:
+        entryPointType:
+          type: string
+        uri:
+          type: string
+        label:
+          type: string
+        pin:
+          type: string
+        accessCode:
+          type: string
+        meetingCode:
+          type: string
+        passcode:
+          type: string
+        password:
+          type: string
+      required:
+        - entryPointType
+        - uri
+        - label
+        - pin
+        - accessCode
+        - meetingCode
+        - passcode
+        - password
+    Key:
+      type: object
+      properties:
+        type:
+          type: string
+      required:
+        - type
+    ConferenceSolution:
+      type: object
+      properties:
+        key:
+          $ref: '#/components/schemas/Key'
+        name:
+          type: string
+        iconUrl:
+          type: string
+      required:
+        - key
+        - name
+        - iconUrl
+    ConferenceData:
+      type: object
+      properties:
+        createRequest:
+          $ref: '#/components/schemas/CreateRequest'
+        entryPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/EntryPoint'
+        conferenceSolution:
+          $ref: '#/components/schemas/ConferenceSolution'
+        conferenceId:
+          type: string
+        signature:
+          type: string
+        notes:
+          type: string
+      required:
+        - createRequest
+        - entryPoints
+        - conferenceSolution
+        - conferenceId
+        - signature
+        - notes
+    Gadget:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        link:
+          type: string
+        iconLink:
+          type: string
+        width:
+          type: number
+        height:
+          type: number
+        display:
+          type: string
+        preferences:
+          type: object
+      required:
+        - type
+        - title
+        - link
+        - iconLink
+        - width
+        - height
+        - display
+        - preferences
+    Override:
+      type: object
+      properties:
+        method:
+          type: string
+        minutes:
+          type: number
+      required:
+        - method
+        - minutes
+    Reminders:
+      type: object
+      properties:
+        useDefault:
+          type: boolean
+        overrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/Override'
+      required:
+        - useDefault
+        - overrides
+    Source:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+      required:
+        - url
+        - title
+    Attachment:
+      type: object
+      properties:
+        fileUrl:
+          type: string
+        title:
+          type: string
+        mimeType:
+          type: string
+        iconLink:
+          type: string
+        fileId:
+          type: string
+      required:
+        - fileUrl
+        - title
+        - mimeType
+        - iconLink
+        - fileId
+    GcalendarEvent:
+      type: object
+      properties:
+        kind:
+          type: string
+        etag:
+          type: string
+        id:
+          type: string
+        status:
+          type: string
+        htmlLink:
+          type: string
+        created:
+          format: date-time
+          type: string
+        updated:
+          format: date-time
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        colorId:
+          type: string
+        creator:
+          $ref: '#/components/schemas/Person'
+        organizer:
+          $ref: '#/components/schemas/Person'
+        start:
+          $ref: '#/components/schemas/Time'
+        end:
+          $ref: '#/components/schemas/Time'
+        endTimeUnspecified:
+          type: boolean
+        recurrence:
+          type: array
+          items:
+            type: string
+        recurringEventId:
+          type: string
+        originalStartTime:
+          $ref: '#/components/schemas/Time'
+        transparency:
+          type: string
+        visibility:
+          type: string
+        iCalUID:
+          type: string
+        sequence:
+          type: number
+        attendees:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attendee'
+        attendeesOmitted:
+          type: boolean
+        extendedProperties:
+          $ref: '#/components/schemas/ExtendedProperties'
+        hangoutLink:
+          type: string
+        conferenceData:
+          $ref: '#/components/schemas/ConferenceData'
+        gadget:
+          $ref: '#/components/schemas/Gadget'
+        anyoneCanAddSelf:
+          type: boolean
+        guestsCanInviteOthers:
+          type: boolean
+        guestsCanModify:
+          type: boolean
+        guestsCanSeeOtherGuests:
+          type: boolean
+        privateCopy:
+          type: boolean
+        locked:
+          type: boolean
+        reminders:
+          $ref: '#/components/schemas/Reminders'
+        source:
+          $ref: '#/components/schemas/Source'
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        eventType:
+          type: string
+      required:
+        - kind
+        - etag
+        - id
+        - status
+        - htmlLink
+        - created
+        - updated
+        - summary
+        - description
+        - location
+        - colorId
+        - creator
+        - organizer
+        - start
+        - end
+        - endTimeUnspecified
+        - recurrence
+        - recurringEventId
+        - originalStartTime
+        - transparency
+        - visibility
+        - iCalUID
+        - sequence
+        - attendees
+        - attendeesOmitted
+        - extendedProperties
+        - hangoutLink
+        - conferenceData
+        - gadget
+        - anyoneCanAddSelf
+        - guestsCanInviteOthers
+        - guestsCanModify
+        - guestsCanSeeOtherGuests
+        - privateCopy
+        - locked
+        - reminders
+        - source
+        - attachments
+        - eventType
+    GcalendarEventsList:
+      type: object
+      properties:
+        kind:
+          type: string
+        etag:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        updated:
+          format: date-time
+          type: string
+        timeZone:
+          type: string
+        accessRole:
+          type: string
+        defaultReminders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DefaultReminders'
+        nextPageToken:
+          type: string
+        nextSyncToken:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/GcalendarEvent'
+        resultSizeEstimate:
+          type: number
+      required:
+        - kind
+        - etag
+        - summary
+        - description
+        - updated
+        - timeZone
+        - accessRole
+        - defaultReminders
+        - nextPageToken
+        - nextSyncToken
+        - events
+        - resultSizeEstimate
+    AmazonOrders:
+      type: object
+      properties:
+        orderCount:
+          type: number
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+      required:
+        - orderCount
+        - orders
+    ShippingAddress:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        country:
+          type: string
+      required:
+        - name
+        - address
+        - country
+    PriceSummary:
+      type: object
+      properties:
+        subtotal:
+          type: string
+        shippingHandling:
+          type: string
+        preTaxTotal:
+          type: string
+        estimatedTax:
+          type: string
+        rewardsPoints:
+          type: string
+        grandTotal:
+          type: string
+      required:
+        - subtotal
+        - shippingHandling
+        - preTaxTotal
+        - estimatedTax
+        - grandTotal
+    Shipment:
+      type: object
+      properties:
+        status:
+          type: string
+        itemCount:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+      required:
+        - status
+        - itemCount
+        - items
+    AmazonOrder:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderDate:
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+        priceSummary:
+          $ref: '#/components/schemas/PriceSummary'
+        shipmentCount:
+          type: number
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+      required:
+        - orderId
+        - orderDate
+        - shippingAddress
+        - priceSummary
+        - shipmentCount
+        - shipments
+    Address:
+      type: object
+      properties:
+        name:
+          type: string
+        addressLineOne:
+          type: string
+        addressLineTwo:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+      required:
+        - name
+        - addressLineOne
+        - addressLineTwo
+        - city
+        - state
+        - postalCode
+        - country
+        - phone
+    AmazonAddresses:
+      type: object
+      properties:
+        addressCount:
+          type: number
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+      required:
+        - addressCount
+        - addresses
+    Auth:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      required:
+        - accessToken
+    CreateClientDto:
+      type: object
+      properties: {}
+    ReturnedClientDto:
+      type: object
+      properties: {}
+    UpdateClientDto:
+      type: object
+      properties: {}
+    CreateConnectionRequestDto:
+      type: object
+      properties:
+        userId:
+          type: string
+        clientId:
+          type: string
+        source:
+          type: object
+        redirect:
+          type: string
+        login:
+          type: boolean
+      required:
+        - userId
+        - source
+        - redirect
+    ReturnedConnectionRequestDto:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        source:
+          type: object
+        status:
+          type: string
+        redirect:
+          type: string
+        authUrl:
+          type: string
+        accountId:
+          type: string
+      required:
+        - id
+        - userId
+    UpdateConnectionRequestDto:
+      type: object
+      properties: {}
+    CreatePolicyDto:
+      type: object
+      properties:
+        userId:
+          type: string
+        clientId:
+          type: string
+        accountId:
+          type: string
+        isPublic:
+          type: boolean
+        isAllAccess:
+          type: boolean
+        permittedMethods:
+          type: array
+          items:
+            type: string
+      required:
+        - userId
+        - accountId
+        - isPublic
+        - isAllAccess
+        - permittedMethods
+    ReturnedPolicyDto:
+      type: object
+      properties:
+        createdAt:
+          type: object
+        updatedAt:
+          type: object
+        clientId:
+          type: object
+        permittedMethods:
+          type: array
+          items:
+            type: string
+      required:
+        - createdAt
+        - updatedAt
+        - clientId
+        - permittedMethods
+    UpdatePolicyDto:
+      type: object
+      properties:
+        userId:
+          type: string
+        clientId:
+          type: string
+        accountId:
+          type: string
+        isPublic:
+          type: boolean
+        isAllAccess:
+          type: boolean
+        permittedMethods:
+          type: array
+          items:
+            type: string

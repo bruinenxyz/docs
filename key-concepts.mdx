@@ -1,0 +1,32 @@
+---
+title: Key concepts
+description: "Understand important concepts needed to build on Bruinen's API."
+---
+
+Bruinen's API revolves around three main concepts: users, sources, and accounts.
+
+## Users
+
+A [user](/api-reference/users) represents a single user's identity in Bruinen's system.
+
+To create a user, pass the user's email as the primary key.
+The user will then be associated with any existing user in Bruinen's system that has already been created with the same primary key.
+
+## Sources
+
+A [source](/api-reference/sources) represents an external company or API that holds valuable parts of a user's identity.
+Example sources include Twitter, Amazon, and Github.
+
+Under the hood, Bruinen establishes a connection to the sources that users have authenticated.
+Once a source is connected, Bruinen will keep the connection current and manage the complexity of scopes, permissions, data validation, and data normalization.
+
+The full list of supported and planned sources can be found [here](https://bruinen.co/sources).
+
+## Accounts
+
+An [account](/api-reference/accounts) represents a single external user account at a specific source (e.g., a user's Google or Facebook account).
+A user can have multiple accounts across different sources, and even multiple accounts from the same source.
+
+Users have full access to all of their accounts, while clients only have access to accounts that the user has granted them permission to access.
+If more than one client requests access to an account for a given user, the existing connection will be reused, meaning your users will only ever have to establish a connection (i.e. sign into their account) a single time.
+

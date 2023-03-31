@@ -1,0 +1,134 @@
+---
+title: "Getting started"
+description: "Set up Bruinen and begin requesting user data."
+---
+
+## API access
+
+In order to use Bruinen, you'll first need an account — you can apply from our docs or through the website.
+
+Bruinen provides two options for API access:
+
+* The easiest method is to use the [Bruinen SDK](/api-reference/bruinen-sdk), enabling you to access the API without having to interact directly with server code
+* It is also possible to access Bruinen directly via API using the base URL `https://api.bruinen.co/`
+
+Currently, Bruinen does not provide a sandbox environment — we recommend testing your integration using your own accounts!
+Refer to the [API reference](/api-reference) a full list of available endpoints.
+
+## Authentication
+
+There are two methods of authentication with Bruinen: using an API key or a bearer token.
+
+### API key (backend only)
+
+API key authentication is intended only for use on a trusted server.
+
+<Warning>
+Do not ship your API key with frontend code
+</Warning>
+
+Place your API key in the `X-API-Key` header of any request to Bruinen.
+
+```typescript
+const client = axios.create({
+    baseUrl: "https://api.bruinen.co/",
+    headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": "YOUR_API_KEY"
+    }
+});
+```
+
+### User access token (frontend)
+
+A user access token is a bearer token that can also be passed to Bruinen for authentication.
+This token is specific to a single user and client, and will only give you access to resources associated with that user.
+A bearer token is appropriate to use in the frontend for an authenticated user.
+
+This token can be generated via the `/auth/:userId` endpoint or using the SDK:
+
+```typescript
+const clientUserToken = bruinenSDK.getUserAuthToken(email);
+```
+
+To use the token once generated, place it in the header of your requests:
+
+```typescript
+Authorization: Bearer <YOUR_TOKEN>
+```
+
+It is a JWT token and can be inspected using `jwt.io` to ensure that it has the proper claims.
+The JWT will have a `sub` field with the user's ID, and a `clientId` field with your client ID.
+
+## Step-by-step instructions
+
+<Note>
+This guide assumes use of the Bruinen SDK, but all steps can also be performed directly via API
+</Note>
+
+### 1. Install the SDK
+
+To install the Bruinen SDK and instantiate the Bruinen API, follow the instructions on the Bruinen SDK reference.
+
+### 2. Create a user
+
+To begin requesting data from your users, you'll first need to create one in the Bruinen system:
+
+```typescript
+const user = bruinenSDK.findOrCreate(email);
+```
+
+Passing an email is required and allows Bruinen to look up the user on our end.
+The `user` object returned will include an `id` field that can be used to request access to user accounts.
+
+### 3. Request access to a source
+
+Now that you have a user created, it's time to ask them permission to access their account(s) and establish the link.
+The easiest way to request access is via [Bruinen Connect](/api-reference/bruinen-connect), our managed UI that you can embed in your app to enable users to directly add and authenticate their accounts.
+
+If instead you'd like to provide a custom authentication experience, you can create a connection request directly:
+
+```typescript
+const { authUrl, accountId } = bruinenSDK.requestConnection(user.id, source, redirect);
+```
+
+| Parameter  | Description                                                                                |
+| ---------- | ------------------------------------------------------------------------------------------ |
+| `redirect` | The link within your app where the user will be redirected once authentication is complete |
+| `source`   | The source you are requesting access to                                                    |
+
+When you request a connection to a source, you will either get back an `authUrl` or an `accountId`, depending on whether or not the user already has an active connection to the requested source. 
+
+If the user has an active connection, an `accountId` will be returned and can be used immediately to access the source.
+
+Otherwise, an `authUrl` will be returned — this is the URL that the user must visit to authenticate with the requested source and allow you to access their credentials. 
+In your application you should present the `authUrl` to the user so they can navigate to it and complete authentication.
+
+<Note>
+For some sources, including non-public API sources (e.g., Amazon) and blockchain wallets (e.g., Ethereum) you must use Bruinen Connect and cannot use `requestConnection` directly.
+</Note>
+
+### 4. Pull data
+
+At this point, you've requested a connection to a source and the user has authenticated their account.
+From now on, all you need is the `accountId` to access that source.
+
+First, you'll want to pull the user's account for the desired source (e.g., Twitter):
+
+```typescript
+const accounts = bruinenSDK.getAccounts(user.id);
+
+const twitterAccount = _.first(accounts, (account) => {
+    account.source === SourceType.twitter
+});
+```
+
+Once you have the account for the requested source, you can pull data using the `id` and the specific methods of the source you've chosen:
+
+```typescript
+const twitterSource = bruinenSDK.twitter(twitterAccount.id);
+
+const profile = twitterSource.getProfile();
+```
+
+Bruinen abstracts away the complexity of handling refresh tokens, scopes, permissions, rate limits, pagination, and other details — all you need to request data from a source is the user ID and your API key or bearer token.

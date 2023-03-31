@@ -1,0 +1,97 @@
+---
+title: "Sources"
+sidebarTitle: "Overview"
+description: "Sources define the locations of user profiles, how to interact with them, and what data is available."
+---
+
+Sources represent external companies or APIs that hold valuable parts of a user's identity.
+Each source defines the location of a user profile, how to interact with said profile, and what data is available.
+Sources all follow similar patterns and are available via SDK and API. 
+
+To access user data from a source, you will need to pass the `accountId` of a user account that you have permission to view.
+
+## Metadata
+
+All sources provide metadata to help you quickly and easily display information to your users.
+It provides user-friendly names, descriptions, icons, and colors specific to each source.
+Metadata is available at `/sources/{source_name}/metadata`.
+
+Fields are also annotated.
+You can use the `fields` field to decide how best to display that data to your user:
+
+```typescript
+{
+  prominent: boolean // If this field is generally user-visible
+  friendlyName: string // User-facing name for the field (ex: Username)
+  description: string // User-facing description for the field (ex: Your Twitter handle)
+  sensitive: boolean // If this field should not be displayed to anyone but the user (ex: email)
+}
+```
+
+Example source metadata is displayed below:
+
+```json
+{
+  friendlyName: "Twitter",
+  description: "The internet's notice board, show us your best tweets",
+  name: "twitter",
+  icon: "https://www.vectorlogo.zone/logos/twitter/twitter-icon.svg",
+  color: ["#1DA1F2"],
+  methods: [
+    {
+      method: "getProfile",
+      route: "profile",
+      friendlyName: "Profile",
+      description: "Your basic twitter profile",
+    },
+    {
+      method: "getTweets",
+      route: "tweets",
+      friendlyName: "Tweets",
+      description: "Your latest tweets",
+      fields: {
+        text: {
+          prominent: true,
+          friendlyName: "Tweet",
+          description: "A tweet",
+        },
+        id: {
+          prominent: false,
+          friendlyName: "ID of the tweet",
+          description: "The ID of the tweet",
+        },
+    },
+    {
+      method: "getFollowers",
+      route: "followers",
+      friendlyName: "Followers",
+      description: "Your followers",
+    },
+    {
+      method: "getLikedTweets",
+      route: "likedTweets",
+      friendlyName: "Liked Tweets",
+      description: "Your liked tweets",
+    },
+    {
+      method: "getMentionTweets",
+      route: "mentionTweets",
+      friendlyName: "Mention Tweets",
+      description: "Your mention tweets",
+    }
+  ]
+}
+```
+
+<Note>
+You can get the metadata for all available sources at `/sources/metadata`
+</Note>
+
+## Accessing a source via API
+
+Source access via API is available at the `/sources/{source-name}` endpoint.
+
+## Accessing a source via SDK
+
+All sources are available as classes on the Bruinen object.
+For example, Twitter is available at Bruinen.Twitter(accountId). See [Bruinen SDK]("/api-reference/bruinen-sdk") for more.
